@@ -12,10 +12,13 @@ from time import time
 #        return url
 
 class Post(models.Model):
-    title = models.CharField (max_length=100)
+    title = models.CharField (max_length=255)
     slug = models.SlugField (unique=True)
     image = models.ImageField (null=True, blank=True, width_field='width_field', height_field='height_field')
-    url = models.CharField (max_length=100)
+    tags = models.CharField(max_length=255)
+
+    # youtube url for specific posts
+    url = models.CharField (max_length=255)
     #urls = models.ManyToManyField (URL,through='URL_POST',through_field=('url','post'))
 
     height_field = models.IntegerField (default=0)
