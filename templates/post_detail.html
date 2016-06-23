@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block titleblock %}
+{{ page_title }}
+{% endblock titleblock %}
+
+{% block main %}
+<div class="col-sm-6 col-sm-offset-3">
+  {% if data.image %}
+  <img src="{{ data.image.url }}" class="image-responsive" />
+  {% endif %}
+  <h1> {{ data.title }} <br/>
+    <small> {{ data.publish }}<br/></small</h1>
+  <hr/>
+  <p>{{ data.content|linebreaks }}</p>
+  <hr/>
+</div>
+{% endblock main %}
