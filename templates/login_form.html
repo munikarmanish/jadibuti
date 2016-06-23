@@ -18,13 +18,13 @@
 
                 <!-- username -->
                 <div class="form-group">
-                    <label for="{{ login_form.username.id_for_label }}">{{ login_form.username.label }}</label>
+                    {{ login_form.username.label_tag }}
                     {{ login_form.username }}
                 </div>
 
                 <!-- password -->
                 <div class="form-group">
-                    <label for="{{ login_form.password.id_for_label }}">{{ login_form.password.label }}</label>
+                    {{ login_form.password.label_tag }}
                     {{ login_form.password }}
                 </div>
 

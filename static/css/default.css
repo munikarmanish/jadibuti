@@ -2,11 +2,12 @@ body {
     margin-top: 50px;
 }
 
-nav.navbar {
+nav.navbar, .well {
     margin-bottom: 0;
 }
 
-.jumbotron, .alert, .btn, .panel, .form-control {
+.jumbotron, .alert, .btn, .panel, .form-control, .well, .dropdown-menu,
+.panel-heading, .panel-footer {
     border-radius: 0;
 }
 
