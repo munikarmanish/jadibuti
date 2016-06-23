@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Post
@@ -28,6 +28,7 @@ def posts_list (request):
 def post_detail(request,slug=None):
     data = get_object_or_404(Post,slug=slug)
     context = {
+        'page_title':data.title,
         'data':data,
     }
 
