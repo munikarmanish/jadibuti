@@ -6,6 +6,7 @@
 
 {% block main %}
 <div class="col-sm-6 col-sm-offset-3">
+  {{ data.image.url }}
   {% if data.image %}
   <img src="{{ data.image.url }}" class="image-responsive" />
   {% endif %}
