@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block page_title %}Login{% endblock page_title %}
+
+{% block main %}
+<div class="container vpad">
+<div class="row">
+<div class="col-sm-offset-4 col-sm-4">
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Register @ Jadibuti</h3>
+        </div><!--panel-heading-->
+        <div class="panel-body">
+
+            <form action="" method="POST" role="register">
+                {% csrf_token %}
+                
+                <!-- first_name -->
+                <div class="form-group">
+                    <label for="{{ form.first_name.id_for_label }}">{{ form.first_name.label }}</label>
+                    {{ form.first_name }}
+                </div>
+
+                <!-- last_name -->
+                <div class="form-group">
+                    <label for="{{ form.last_name.id_for_label }}">{{ form.last_name.label }}</label>
+                    {{ form.last_name }}
+                </div>
+
+                <!-- email -->
+                <div class="form-group">
+                    <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+                    {{ form.email }}
+                </div>
+
+                <!-- username -->
+                <div class="form-group">
+                    <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+                    {{ form.username }}
+                </div>
+
+                <!-- password -->
+                <div class="form-group">
+                    <label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
+                    {{ form.password }}
+                </div>
+
+                <!-- submit -->
+                <button type="submit" class="btn btn-lg btn-primary btn-block">Register</button>
+
+            </form>
+
+        </div><!-- panel-body -->
+        <div class="panel-footer">
+            <p>Already registered? <a href="{% url 'login' %}">Login now!</a></a>
+        </div><!--panel-footer-->
+    </div><!-- panel -->
+
+</div><!--col-->
+</div><!--row-->
+</div><!--container-->
+{% endblock main %}
