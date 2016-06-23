@@ -9,6 +9,7 @@ class LoginForm(forms.Form):
             attrs={
                 'class': 'form-control',
                 'required': 'true',
+                'placeholder': 'Enter your username',
             }
         ),
         label="Username",
@@ -20,6 +21,7 @@ class LoginForm(forms.Form):
             attrs={
                 'class': 'form-control',
                 'required': 'true',
+                'placeholder': 'Enter your password',
             }
         ),
         label="Password",
@@ -34,6 +36,7 @@ class RegisterForm(forms.Form):
             attrs={
                 'class': 'form-control',
                 'required': 'true',
+                'placeholder': 'Eg: John',
             },
         ),
         label='First name',
@@ -45,10 +48,10 @@ class RegisterForm(forms.Form):
             attrs={
                 'class': 'form-control',
                 'required': 'true',
+                'placeholder': 'Eg: Doe',
             },
         ),
         label='Last name',
-        required=True,
     )
 
     email = forms.EmailField(
@@ -56,11 +59,10 @@ class RegisterForm(forms.Form):
             attrs={
                 'class': 'form-control',
                 'required': 'true',
+                'placeholder': 'Eg: john@doe.com',
             },
         ),
-        label='Email',
-        required=True,
-    )
+        label='Email',    )
 
     username = forms.SlugField(
         max_length=50,
@@ -68,10 +70,10 @@ class RegisterForm(forms.Form):
             attrs={
                 'class': 'form-control',
                 'required': 'true',
+                'placeholder': 'Eg: johndoe',
             }
         ),
         label="Username",
-        required=True,
     )
 
     password = forms.CharField(
@@ -80,8 +82,8 @@ class RegisterForm(forms.Form):
             attrs={
                 'class': 'form-control',
                 'required': 'true',
+                'placeholder': 'Make it secure',
             }
         ),
         label="Password",
-        required=True,
     )
