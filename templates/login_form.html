@@ -3,7 +3,7 @@
 {% block page_title %}Login{% endblock page_title %}
 
 {% block main %}
-<div class="container">
+<div class="container vpad">
 <div class="row">
 <div class="col-sm-offset-4 col-sm-4">
 
@@ -13,7 +13,8 @@
         </div><!--panel-heading-->
         <div class="panel-body">
 
-            <form action="" method="POST" role="login">{% csrf_token %}
+            <form action="" method="POST" role="login">
+                {% csrf_token %}
 
                 <!-- username -->
                 <div class="form-group">

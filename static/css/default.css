@@ -1,3 +1,16 @@
 body {
     margin: 0;
 }
+
+nav.navbar {
+    margin-bottom: 0;
+}
+
+.jumbotron, .alert, .btn, .panel, .form-control {
+    border-radius: 0;
+}
+
+.vpad {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
