@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block titleblock %}
+{{ page_title }}
+{% endblock titleblock %}
+
+{% block page_header %}
+  <h1>Blog Posts</h1>
+{% endblock page_header %}
+
+{% block main %}
+<div class="col-sm-8 col-sm-offset-3">
+  {% for data in data_list %}
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="thumbnail">
+          {% if data.image %}
+            <img src='{{ data.image.url }}' class='image-responsive' />
+          {% endif %}
+          <p>{{ data.content|truncatechars:100 }}</p>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+{% endblock main %}
