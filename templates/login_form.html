@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block page_title %}Login{% endblock page_title %}
+
+{% block main %}
+<div class="container">
+<div class="row">
+<div class="col-sm-offset-4 col-sm-4">
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Login @ Jadibuti</h3>
+        </div><!--panel-heading-->
+        <div class="panel-body">
+
+            <form action="" method="POST" role="login">{% csrf_token %}
+
+                <!-- username -->
+                <div class="form-group">
+                    <label for="{{ login_form.username.id_for_label }}">{{ login_form.username.label }}</label>
+                    {{ login_form.username }}
+                </div>
+
+                <!-- password -->
+                <div class="form-group">
+                    <label for="{{ login_form.password.id_for_label }}">{{ login_form.password.label }}</label>
+                    {{ login_form.password }}
+                </div>
+
+                <!-- submit -->
+                <button type="submit" class="btn btn-lg btn-primary btn-block">Login</button>
+
+            </form>
+
+        </div><!-- panel-body -->
+        <div class="panel-footer">
+            <p>Not registered yet? <a href="#">Register now!</a></a>
+        </div><!--panel-footer-->
+    </div><!-- panel -->
+
+</div><!--col-->
+</div><!--row-->
+</div><!--container-->
+{% endblock main %}
