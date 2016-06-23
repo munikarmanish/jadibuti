@@ -2,6 +2,5 @@
 *.pyc
 *.sql*
 *migrations*
-static
 static_cdn
 media_cdn
