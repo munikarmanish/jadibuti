@@ -1,0 +1,39 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  {% block meta %}
+  {% endblock meta %}
+
+  <title>{% block titleblock %}{% endblock titleblock %} | Jadibuti</title>
+
+  <!-- bootstrap css -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  {% block styles %}
+  {% endblock styles %}
+</head>
+
+<body>
+  {% include 'navbar.html' %}
+
+  {% block page_header %}
+  {% endblock page_header %}
+
+  {% block main %}
+  {% endblock main %}
+
+  {% include 'footer.html' %}
+
+  <!-- jquery js -->
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+  <!-- bootstrap js -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  {% block scripts %}
+  {% endblock scripts %}
+</body>
+</html>
