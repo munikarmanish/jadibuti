@@ -11,18 +11,50 @@
 {% endblock page_header %}
 
 {% block main %}
+
+{% if not data_list and request.GET.q %}
+  <div class="col-sm-10 col-sm-offset-2">
+    <h3>No Result Found</h3>
+  </div>
+{% endif %}
+
+<div class="col-sm-12 col-sm-offset-2">
   {% for data in data_list %}
     <div class="row">
-      <div class="col-sm-6">
+      <div class="col-sm-6 ">
         <div class="thumbnail">
           {% if data.image %}
+          <a href="{{ data.get_absolute_url }}">
             <img src='{{ data.image.url }}' class='img-responsive'>
+          </a>
           {% endif %}
           <div class='caption'>
             <h3><a href="{{ data.get_absolute_url }}"> {{ data.title|truncatechars:30 }} </a> </h3>
+            <small>post:{{ data.timestamp }} updated:{{ data.updated|timesince }}</small>
           <p>{{ data.content|truncatechars:100 }}</p>
         </div>
       </div>
     </div>
+  </div>
   {% endfor %}
+
+  {% if data_list %}
+
+  <div class="pager" >
+    {% if data_list.has_previous %}
+
+      <a href='?{{ page_request_var }}={{ data_list.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}'><span class="glyphicon glyphicon-chevron-left" ></span></a>
+
+    {% endif %}
+
+    Page {{ data_list.number }} of {{ data_list.paginator.num_pages }}.
+
+    {% if data_list.has_next %}
+      <a href='?{{ page_request_var }}={{ data_list.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}'><span class="glyphicon glyphicon-chevron-right" ></span></a>
+    {% endif %}
+  </div>
+
+  {% endif %}
+</div>
+
 {% endblock main %}
