@@ -1,0 +1,14 @@
+{% if messages %}
+<section>
+
+    {% for m in messages %}
+
+    <div class="alert alert-{{ m.tags|truncatewords:1 }} {% if 'error' in m.tags %}alert-danger{% endif %}">
+    <div class="container">
+        <p>{{ m }}</p>
+    </div><!--alert-->
+
+    {% endfor %}
+
+</section>
+{% endif %}
