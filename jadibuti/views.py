@@ -6,5 +6,5 @@ def home_view (request):
     context = {
         'page_title':'Home'
     }
-    return HttpResponse('<h1>Home Page</h1>')
-    #return render (request, 'home_page.html',context)
+    #return HttpResponse('<h1>Home Page</h1>')
+    return render (request, 'home_page.html',context)
