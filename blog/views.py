@@ -23,7 +23,7 @@ def posts_list (request):
         'data_list':data_list,
     }
 
-    return render(request, 'posts_list.html',context)
+    return render(request, 'posts_list.html', context)
 
 def post_detail(request,slug=None):
     data = get_object_or_404(Post,slug=slug)
@@ -32,4 +32,4 @@ def post_detail(request,slug=None):
         'data':data,
     }
 
-    return render(request, 'post_detail.html',context)
+    return render(request, 'post_detail.html', context)

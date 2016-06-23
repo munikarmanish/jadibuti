@@ -15,6 +15,8 @@ Including another URLconf
 """
 
 from django.conf.urls import url, include
+from django.conf.urls.static import static
+from django.conf import settings
 from django.contrib import admin
 from .views import *
 from account.views import *
@@ -22,8 +24,12 @@ from account.views import *
 urlpatterns = [
     url(r'^$', home_view, name='home'),
     url(r'^admin/', admin.site.urls),
-    url(r'^blog/',include("blog.urls", namespace='blog')),
+    url(r'^blog/', include("blog.urls", namespace='blog')),
     url(r'^login/$', login_view, name='login'),
     url(r'^logout/$', logout_view, name='logout'),
     url(r'^register/$', register_view, name='register'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

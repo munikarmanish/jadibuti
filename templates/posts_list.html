@@ -16,7 +16,7 @@
       <div class="col-sm-6">
         <div class="thumbnail">
           {% if data.image %}
-            <img src='{{ data.image.url }}' class='image-responsive' />
+            <img src='{{ data.image.url }}' class='img-responsive'>
           {% endif %}
           <div class='caption'>
             <h3><a href="{{ data.get_absolute_url }}"> {{ data.title|truncatechars:30 }} </a> </h3>
