@@ -16,7 +16,7 @@
     <div class="collapse navbar-collapse" id="nav1">
 
         <ul class="nav navbar-nav">
-            <li><a href="">Browse Herbs</a></li>
+            <li><a href="{% url 'browse:browse'  %}">Browse Herbs</a></li>
             <li><a href="{% url 'blog:list' %}">Natural Remedies</a></li>
         </ul>
 
@@ -36,7 +36,7 @@
         </form>
 
         <ul class="nav navbar-nav navbar-right">
-            {% if request.user.is_authenticated %}
+          {% if request.user.is_authenticated %} 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         {{ request.user.first_name}} {{ request.user.last_name }} <span class="caret"></span>

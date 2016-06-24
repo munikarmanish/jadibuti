@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^$', home_view, name='home'),
     url(r'^admin/', admin.site.urls),
     url(r'^blog/', include("blog.urls", namespace='blog')),
+    url(r'^browse/', include ('browse.urls', namespace='browse')),
     url(r'^login/$', login_view, name='login'),
     url(r'^logout/$', logout_view, name='logout'),
     url(r'^register/$', register_view, name='register'),
