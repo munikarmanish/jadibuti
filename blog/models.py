@@ -75,7 +75,7 @@ STAR_CHOICES = {
 class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    star = models.SmallIntegerField(choices=STAR_CHOICES)
+    star = models.SmallIntegerField(choices=STAR_CHOICES, default=3)
     comment = models.TextField(null=True)
     created = models.DateTimeField(auto_now=True, auto_now_add=False)
 

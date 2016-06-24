@@ -27,6 +27,7 @@ class ReviewForm(forms.ModelForm):
             'comment': forms.Textarea(
                 attrs={
                     'class': 'form-control',
+                    'rows': 3,
                 }
             ),
         }
