@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
-from .models import Post
+from .models import *
 
 
 # Create your views here.
@@ -10,6 +10,8 @@ from .models import Post
 def posts_list(request):
     page_title = "Natural Remedies"
     posts = Post.objects.all()
+    total_posts = posts.count()
+    categories = Category.objects.all()
 
     search_query = request.GET.get('q')
     if search_query:
@@ -34,6 +36,8 @@ def posts_list(request):
         'page_title': page_title,
         'paginator': paginator,
         'posts': posts,
+        'total_posts': total_posts,
+        'categories': categories,
         'page_var': page_var,
     }
     return render(request, 'posts_list.html', context)

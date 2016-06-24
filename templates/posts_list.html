@@ -28,6 +28,8 @@
 
     {% for post in posts %}
       <div class="row">
+      <div class="col-sm-12">
+
         <div class="thumbnail">
           {% if post.image %}
           <a href="{{ post.get_absolute_url }}">
@@ -40,12 +42,15 @@
             <div>{{ post.summary }}</div>
           </div><!--caption-->
         </div><!--thumbnail-->
+
+      </div><!--col-->
       </div><!--row-->
     {% endfor %}
 
 
     {% if posts %}
       <div class="row text-center">
+      <div class="col-sm-12">
 
         <nav>
           <ul class="pagination">
@@ -89,12 +94,29 @@
           </ul>
         </nav>
 
+      </div><!--col-->
       </div><!--row-->
     {% endif %}
   </div><!--col-->
 
-  <div class="com-md-4">
-    <h3>Categories</h3>
+  <div class="col-md-4">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Categories
+    </div><!--panel-heading-->
+    <div class="panel-body" style="padding:0;">
+      <ul class="list-group" style="margin:0;">
+          <a class="list-group-item" href="{% url 'blog:list' %}">All
+            <span class="label label-default pull-right">{{ total_posts }}</span></a>
+        {% for c in categories %}
+          <a class="list-group-item{% if request.GET.c == c.id %} active{% endif %}"
+            href="">
+            {{ c.name }} <span class="label label-default pull-right">{{ c.post_set.all|length }}</span>
+          </a>
+        {% endfor %}
+      </ul>
+    </div><!--panel-body-->
+  </div><!--panel-->
   </div><!--col-->
 
 </div><!--row-->
