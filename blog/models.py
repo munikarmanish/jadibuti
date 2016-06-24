@@ -5,11 +5,12 @@ from django.utils.text import slugify
 from django.db.models.signals import pre_save
 from time import time
 
-# Create your models here.
-# class URL(models.Model):
-#    url = models.CharField (max_length=100)
-#    def __str__(self):
-#        return url
+
+class Category(models.Model):
+    name = models.CharField(max_length=255, unique=True)
+
+    def __str__(self):
+        return self.name
 
 
 class Post(models.Model):
@@ -28,6 +29,7 @@ class Post(models.Model):
 
     tags = models.CharField(max_length=255)
     source = models.CharField(max_length=255)
+    categories = models.ManyToManyField(Category)
 
     def __str__(self):
         return self.title
@@ -49,6 +51,3 @@ def pre_save_post_receiver(sender, instance, *args, **kwargs):
 
 pre_save.connect(pre_save_post_receiver, sender=Post)
 
-# class URL_POST(models.Model):
-#    url = models.ForeignKey(URL, on_delete=models.CASCADE)
-#    post = models.ForeignKey(Post, on_delete=models.CASCADE)
