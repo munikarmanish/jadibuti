@@ -12,29 +12,42 @@ def posts_list(request):
     page_title = "Natural Remedies"
     posts = Post.objects.all()
     total_posts = posts.count()
-    categories = Category.objects.all()
+    query_list = []
+    unique_query_list = []
+    splitted_search_query = []
 
     # all categories to list in side panel
     # make categories a list of category string
     # to make it different from category of database
-    categories = Category.objects.all()
-    category_selected = request.GET.get('category')
+    categories = Category.objects.all().order_by('name')
 
     #posts = posts.filter(category)
     search_query = request.GET.get('q')
     if search_query:
+        # splitted_search_query=[]
+        splitted_search_query = search_query.split(" ")
+        for something in splitted_search_query:
+            if something not in unique_query_list:
+                unique_query_list.append(something)
+        splitted_search_query = unique_query_list
         page_title = "Search results"
         posts = posts.filter(
             Q(title__icontains=search_query) |
             Q(content__icontains=search_query)
         ).distinct()
+    if not posts:
+        for word in splitted_search_query:
+            posts = Post.objects.all()
+            posts = posts.filter(Q(title__icontains=word) | Q(
+                content__icontains=word)).distinct()
+            query_list.append(posts)
 
     # filter category as well
     category_id = request.GET.get('c')
     if category_id:
         posts = posts.filter(categories__id=category_id)
 
-    paginator = Paginator(posts, 1)
+    paginator = Paginator(posts, 2)
     page_var = 'page'
     page_no = request.GET.get(page_var)
 
@@ -52,6 +65,9 @@ def posts_list(request):
         'posts': posts,
         'total_posts': total_posts,
         'page_var': page_var,
+        'splitted_search_query': splitted_search_query,
+        'query_list': query_list,
+        'category_selected': category_id,
     }
     return render(request, 'posts_list.html', context)
 
