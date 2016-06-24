@@ -34,7 +34,7 @@ def posts_list(request):
     if not posts:
         for words in splitted_search_query:
             posts = Post.objects.all()
-            posts = posts.filter(Q(title__icontains=words) | Q(content__icontains=search_query)).distinct()
+            posts = posts.filter(Q(title__icontains=words) | Q(content__icontains=words)).distinct()
             query_list.append(posts)
 
     paginator = Paginator(posts, 4)
