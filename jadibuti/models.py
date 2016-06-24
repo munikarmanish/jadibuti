@@ -14,7 +14,3 @@ class Herb(models.Model):
 
 class Disease(models.Model):
     name = models.CharField(max_length=255)
-
-
-class Categories(models.Model):
-    name = models.CharField(max_length=255)
