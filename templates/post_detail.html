@@ -13,9 +13,11 @@
 
     <header>
         <h1>{{ post.title }}
+            {% if post.reviews %}
             <span class="label label-success pull-right">
                 <span class="glyphicon glyphicon-star"></span> {{ post.rating|floatformat:1 }}
             </span>
+            {% endif %}
         </h1>
     </header>
 

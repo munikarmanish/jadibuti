@@ -44,11 +44,13 @@ class Post(models.Model):
     def rating(self):
         r = 0
         reviews = self.reviews()
-        if len(reviews) == 0:
-            return 0
-        for review in reviews:
-            r += review.star
-        return r / len(reviews)
+
+        if reviews:
+            for review in reviews:
+                r += review.star
+            return r / len(reviews)
+        else:
+            return None
 
 
 def create_slug(instance):
@@ -65,19 +67,19 @@ def pre_save_post_receiver(sender, instance, *args, **kwargs):
 pre_save.connect(pre_save_post_receiver, sender=Post)
 
 
-STAR_CHOICES = {
+STAR_CHOICES = (
     (1, '1 Star'),
     (2, '2 Star'),
     (3, '3 Star'),
     (4, '4 Star'),
     (5, '5 Star'),
-}
+)
 
 
 class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    star = models.SmallIntegerField(choices=STAR_CHOICES)
+    star = models.SmallIntegerField(choices=STAR_CHOICES, default=3)
     comment = models.TextField(null=True)
     created = models.DateTimeField(auto_now=True, auto_now_add=False)
 
