@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+
+{% block page_title %}
+
+{{ post.title }}
+
+{% endblock page_title %}
+
+{% block page_header %}
+<header>
+<div class="container">
+    <h1>{{ herb.eng_name }} | {{ herb.nep_name }}</h1>
+    <hr>
+</div><!--container-->
+</header>
+{% endblock page_header %}
+
+{% block main %}
+<div class="container">
+
+    {% if herb.image %}
+    <img src="{{ herb.image.url }}" class="image-responsive" />
+    <hr>
+    {% endif %}
+
+    <div class="content">
+    {{ post.content|markdown }}
+    </div><!--content-->
+
+    <hr>
+    
+</div><!--container-->
+{% endblock main %}
