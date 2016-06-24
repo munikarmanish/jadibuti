@@ -108,10 +108,10 @@ def post_detail(request, slug=None):
 
     if request.user.is_authenticated():
         reviews = post.reviews().filter(~Q(user__id=request.user.id))
-        context['reviews'] = reviews
+        context['reviews'] = reviews[0:5]
         review = reviews.filter(user__id=request.user.id)
         context['review'] = review
     else:
-        context['reviews'] = post.reviews()
+        context['reviews'] = post.reviews()[0:5]
 
     return render(request, 'post_detail.html', context)
