@@ -14,6 +14,7 @@ from time import time
 
 class Post(models.Model):
     title = models.CharField(max_length=255)
+    summary = models.CharField(max_length=255)
     slug = models.SlugField(unique=True)
     content = models.TextField()
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
@@ -26,10 +27,7 @@ class Post(models.Model):
     width_field = models.IntegerField(default=0)
 
     tags = models.CharField(max_length=255)
-
-    # youtube url for specific posts
-    url = models.CharField(max_length=255, null=True)
-    #urls = models.ManyToManyField (URL,through='URL_POST',through_field=('url','post'))
+    source = models.CharField(max_length=255)
 
     def __str__(self):
         return self.title

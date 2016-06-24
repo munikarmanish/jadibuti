@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 
-{% block titleblock %}
+{% load markdown_deux_tags %}
+
+{% block page_title %}
 {{ post.title }}
-{% endblock titleblock %}
+{% endblock page_title %}
 
 {% block page_header %}
 <header>
@@ -17,11 +19,20 @@
 {% block main %}
 <div class="container">
 
-  {% if post.image %}
+    {% if post.image %}
     <img src="{{ post.image.url }}" class="image-responsive" />
-  {% endif %}
+    <hr>
+    {% endif %}
 
-  <p>{{ post.content|linebreaks }}</p>
+    <div class="content">
+    {{ post.content|markdown }}
+    </div><!--content-->
+
+    <hr>
+    <footer>
+        <p>Source: {{ post.source }}</p>
+    </footer>
+
 
 </div><!--container-->
 {% endblock main %}
