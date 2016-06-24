@@ -15,6 +15,7 @@ def posts_list(request):
     categories = Category.objects.all()
     query_list =[]
     unique_query_list=[]
+    test = 1
 
     # all categories to list in side panel
     # make categories a list of category string
@@ -24,7 +25,7 @@ def posts_list(request):
 
     #posts = posts.filter(category)
     search_query = request.GET.get('q')
-#    splitted_search_query=[]
+    #splitted_search_query=[]
     splitted_search_query = search_query.split(" ")
     for something in splitted_search_query:
         if something not in unique_query_list:
@@ -41,6 +42,8 @@ def posts_list(request):
             posts = Post.objects.all()
             posts = posts.filter(Q(title__icontains=words) | Q(content__icontains=words)).distinct()
             query_list.append(posts)
+        test = 0
+
 
 
     paginator = Paginator(posts, 6)
@@ -63,7 +66,8 @@ def posts_list(request):
         'categories': categories,
         'page_var': page_var,
         'splitted_search_query':splitted_search_query,
-        'query_list': query_list
+        'query_list': query_list,
+        'test':test
     }
     return render(request, 'posts_list.html', context)
 
