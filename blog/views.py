@@ -14,6 +14,7 @@ def posts_list(request):
     total_posts = posts.count()
     categories = Category.objects.all()
     query_list =[]
+    unique_query_list=[]
 
     # all categories to list in side panel
     # make categories a list of category string
@@ -23,8 +24,12 @@ def posts_list(request):
 
     #posts = posts.filter(category)
     search_query = request.GET.get('q')
-    #splitted_search_query=[]
+#    splitted_search_query=[]
     splitted_search_query = search_query.split(" ")
+    for something in splitted_search_query:
+        if something not in unique_query_list:
+            unique_query_list.append(something)
+    splitted_search_query = unique_query_list
     if search_query:
         page_title = "Search results"
         posts = posts.filter(
@@ -37,7 +42,8 @@ def posts_list(request):
             posts = posts.filter(Q(title__icontains=words) | Q(content__icontains=words)).distinct()
             query_list.append(posts)
 
-    paginator = Paginator(posts, 4)
+
+    paginator = Paginator(posts, 6)
     page_var = 'page'
     page_no = request.GET.get(page_var)
 
