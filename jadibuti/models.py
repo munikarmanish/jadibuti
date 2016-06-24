@@ -1,7 +1,7 @@
 from django import models
 
 
-class Herb (models.Model):
+class Herb(models.Model):
     sci_name = models.CharField(max_length=50, null=True)
     eng_name = models.CharField(max_length=50)
     nep_name = models.CharField(max_length=50, null=True)
@@ -12,9 +12,9 @@ class Herb (models.Model):
     width_field = models.IntegerField(default=0)
 
 
-class Disease (models.Model):
+class Disease(models.Model):
     name = models.CharField(max_length=255)
 
 
-class Categories (models.Model):
+class Categories(models.Model):
     name = models.CharField(max_length=255)
