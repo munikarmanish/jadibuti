@@ -23,10 +23,6 @@ def posts_list(request):
     page_title = "Natural Remedies"
     posts = Post.objects.all()
     total_posts = posts.count()
-    categories = Category.objects.all()
-    query_list =[]
-    unique_query_list=[]
-    test = 1
     query_list = []
     unique_query_list = []
     splitted_search_query = []
@@ -38,12 +34,6 @@ def posts_list(request):
 
     #posts = posts.filter(category)
     search_query = request.GET.get('q')
-    #splitted_search_query=[]
-    splitted_search_query = search_query.split(" ")
-    for something in splitted_search_query:
-        if something not in unique_query_list:
-            unique_query_list.append(something)
-    splitted_search_query = unique_query_list
     if search_query:
         # splitted_search_query=[]
         splitted_search_query = search_query.split(" ")
@@ -61,11 +51,9 @@ def posts_list(request):
     if not posts and search_query:
         for words in splitted_search_query:
             posts = Post.objects.all()
-            posts = posts.filter(Q(title__icontains=words) | Q(
-                content__icontains=words)).distinct()
+            posts = posts.filter(Q(title__icontains=word) | Q(
+                content__icontains=word)).distinct()
             query_list.append(posts)
-        test = 0
-
 
     # filter category as well
     category_id = request.GET.get('c')
@@ -90,10 +78,11 @@ def posts_list(request):
         'posts': posts,
         'total_posts': total_posts,
         'page_var': page_var,
-        'splitted_search_query':splitted_search_query,
+        'splitted_search_query': splitted_search_query,
         'query_list': query_list,
-        'test':test
+        'category_selected': category_id,
     }
+    
     return render(request, 'posts_list.html', context)
 
 
@@ -108,8 +97,8 @@ def post_detail(request, slug=None):
             user = request.user
             star = form.cleaned_data.get('star')
             comment = form.cleaned_data.get('comment')
-            review, is_created = Review.objects.get_or_create(user=user, post=post,
-                defaults={'star': star, 'comment': comment})
+            review, is_created = Review.objects.get_or_create(
+                user=user, post=post, defaults={'star': star, 'comment': comment})
             review.star = star
             review.comment = comment
             review.save()
