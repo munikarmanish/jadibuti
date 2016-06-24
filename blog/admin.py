@@ -4,10 +4,13 @@ from django.contrib import admin
 from blog.models import Post
 
 class PostModelAdmin (admin.ModelAdmin):
-    list_display = ['title', 'updated','timestamp']
+    list_display = ['title', 'updated','created']
     list_display_links = ['title']
-    list_filter = ['updated','timestamp']
+    list_filter = ['updated','created']
     search_fields = ['title','content']
+    prepopulated_fields = {
+        'slug': ('title',),
+    }
 
     class Meta:
         model = Post

@@ -7,38 +7,39 @@ from .models import Post
 
 # Create your views here.
 
-def posts_list (request):
-    post_data_list = Post.objects.all()
+def posts_list(request):
+    posts = Post.objects.all()
 
     search_query = request.GET.get('q')
     if search_query:
-        post_data_list = post_data_list.filter(Q(title__icontains=search_query) |
-            Q(content__icontains=search_query)).distinct()
+        posts = posts.filter(
+            Q(title__icontains=search_query) |
+            Q(content__icontains=search_query)
+        ).distinct()
 
-    paginator = Paginator (post_data_list, 1)
-    page_request_var = 'page'
-    page_no = request.GET.get(page_request_var)
+    paginator = Paginator(posts, 2)
+    page_var = 'page'
+    page_no = request.GET.get(page_var)
 
     try:
-        data_list = paginator.page(page_no)
+        posts = paginator.page(page_no)
     except PageNotAnInteger:
-        data_list = paginator.page(1)
+        posts = paginator.page(1)
     except EmptyPage:
-        data_list = paginator.page(paginator.num_pages)
+        posts = paginator.page(paginator.num_pages)
 
     context = {
-        'page_title':'blog',
-        'data_list':data_list,
-        'page_request_var':page_request_var,
+        'page_title': 'Natural Remedies',
+        'paginator': paginator,
+        'posts': posts,
+        'page_var': page_var,
     }
-
     return render(request, 'posts_list.html', context)
 
-def post_detail(request,slug=None):
-    data = get_object_or_404(Post,slug=slug)
-    context = {
-        'page_title':data.title,
-        'data':data,
-    }
 
+def post_detail(request, slug=None):
+    post = get_object_or_404(Post, slug=slug)
+    context = {
+        'post': post,
+    }
     return render(request, 'post_detail.html', context)

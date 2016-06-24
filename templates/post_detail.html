@@ -1,21 +1,27 @@
 {% extends 'base.html' %}
 
 {% block titleblock %}
-{{ page_title }}
+{{ post.title }}
 {% endblock titleblock %}
 
+{% block page_header %}
+<header>
+<div class="container">
+    <h1>{{ post.title }}</h1>
+    <small>Posted on {{ post.created|date }}</small>
+    <hr>
+</div><!--container-->
+</header>
+{% endblock page_header %}
+
 {% block main %}
+<div class="container">
 
-<div class="col-sm-12 col-sm-offset-2">
-  {% if data.image %}
-    <img src="{{ data.image.url }}" class="image-responsive" />
+  {% if post.image %}
+    <img src="{{ post.image.url }}" class="image-responsive" />
   {% endif %}
-  <h1> {{ data.title }} <br/>
-    <small> post : {{ data.timestamp }} | updated : {{ data.updated|timesince }}
-    </small</h1>
-  <hr/>
-  <p>{{ data.content|linebreaks }}</p>
-  <hr/>
-</div>
 
+  <p>{{ post.content|linebreaks }}</p>
+
+</div><!--container-->
 {% endblock main %}
