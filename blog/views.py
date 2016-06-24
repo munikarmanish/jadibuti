@@ -51,8 +51,8 @@ def posts_list(request):
     if not posts and search_query:
         for words in splitted_search_query:
             posts = Post.objects.all()
-            posts = posts.filter(Q(title__icontains=word) | Q(
-                content__icontains=word)).distinct()
+            posts = posts.filter(Q(title__icontains=words) | Q(
+                content__icontains=words)).distinct()
             query_list.append(posts)
 
     # filter category as well
