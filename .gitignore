@@ -4,3 +4,6 @@
 *migrations*
 static_cdn
 media_cdn
+*~
+*.#
+*#*#

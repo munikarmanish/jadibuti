@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 
-{% block titleblock %}
-{{ post.title }}
-{% endblock titleblock %}
+{% block page_title %}
+{{ post.title|truncatechars:10 }}
+{% endblock page_title %}
 
 {% block page_header %}
 <header>
