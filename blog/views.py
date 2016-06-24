@@ -29,6 +29,11 @@ def posts_list(request):
             Q(content__icontains=search_query)
         ).distinct()
 
+    # filter category as well
+    category_id = request.GET.get('c')
+    if category_id:
+        posts = posts.filter(categories__id=category_id)
+
     paginator = Paginator(posts, 1)
     page_var = 'page'
     page_no = request.GET.get(page_var)
@@ -42,11 +47,10 @@ def posts_list(request):
 
     context = {
         'page_title': page_title,
-        'categories':categories,
+        'categories': categories,
         'paginator': paginator,
         'posts': posts,
         'total_posts': total_posts,
-        'categories': categories,
         'page_var': page_var,
     }
     return render(request, 'posts_list.html', context)
