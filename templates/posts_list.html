@@ -18,6 +18,9 @@
 <!---{%for i in splitted_search_query %}
 <h2>{{i}}</h2>
 {%endfor %} --->
+<!---{%for i in posts %}
+<h2>{{i}}</h2>
+{%endfor %}--->
 <div class="container">
 <div class="row">
   {% if query_list %}
@@ -56,7 +59,8 @@
         </div><!--row-->
       {% endif %}
     {% endif %}
-
+  <!---  <h1>{{test}}</h1> --->
+{%if test%}
     {% for post in posts %}
       <div class="row">
       <div class="col-sm-12">
@@ -85,7 +89,7 @@
       </div><!--col-->
       </div><!--row-->
     {% endfor %}
-
+{%endif%}
 
     {% if posts %}
       <div class="row text-center">
