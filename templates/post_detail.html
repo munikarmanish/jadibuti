@@ -12,7 +12,11 @@
 <div class="col-sm-10 col-sm-offset-1">
 
     <header>
-        <h1>{{ post.title }}</h1>
+        <h1>{{ post.title }}
+            <span class="label label-success pull-right">
+                <span class="glyphicon glyphicon-star"></span> {{ post.rating|floatformat:1 }}
+            </span>
+        </h1>
     </header>
 
     <hr>
@@ -22,12 +26,39 @@
     <hr>
     {% endif %}
 
-    <div class="caption">
+    <div class="content">
         {{ post.content|markdown }}
         <hr>
         <footer class="pull-right"><em>Source: {{ post.source }}</em></footer>
         <div class="clearfix"></div>
     </div><!--content-->
+
+    <hr>
+
+    <!-- show the review form if user is authenticated -->
+    {% if request.user.is_authenticated and not re %}
+    <div class="review-form well">
+        <h4>Write or update review</h4>
+        <form action="" method="POST" role="review">{% csrf_token %}
+            <div class="form-group">
+                {{ form.star.label_tag }}
+                {{ form.star }}
+            </div>
+            <div class="form-group">
+                {{ form.comment.label_tag }}
+                {{ form.comment }}
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Review</button>
+        </form>
+    </div><!--review-form-->
+    {% endif %}
+
+    {% for r in post.reviews %}
+    <div class="reviews well">
+        <h4>{{ r.user }} <span class="label label-success">{{ r.star }}</span> <small>wrote on {{ r.created|date }}:</small></h4>
+        <p>{{ r.comment|linebreaks }}</p>
+    </div>
+    {% endfor %}
 
 </div><!--col-->
 </div><!--container-->
