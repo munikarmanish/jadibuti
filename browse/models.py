@@ -1,9 +1,13 @@
 from django.db import models
+from django.core.urlresolvers import reverse 
 
 # Create your models here.
 
 class HerbCategory (models.Model):
     name = models.CharField(max_length=50, null=False)
+
+    def __str__(self):
+        return name
 
 class Herb(models.Model):
     sci_name = models.CharField(max_length=50, null=True)
@@ -15,7 +19,11 @@ class Herb(models.Model):
     height_field = models.IntegerField(default=0)
     width_field = models.IntegerField(default=0)
     description = models.TextField ()
+
     category = models.ManyToManyField (HerbCategory)
+
+
     def get_absolute_url (self):
-    	return reverse('browse:browse', kwargs={'slug': self.sci_name})
+        #return '#'
+    	return reverse('browse:herb', kwargs={'slug': self.id})
 

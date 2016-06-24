@@ -16,8 +16,26 @@
 
 {% block main %}
 
-<div class="col-sm-8 col-sm-offset-2">
+<div class="container">
+<div class="row">
 
+  <div class="col-md-8">
+  {% for herb in herbs %}
+  	<div class="thumbnail">
+  		{% if herb.image %}
+  			<a href="{{ herb.get_absolute_url }}">
+            <img src='{{ herb.image.url }}' class='img-responsive'>
+            </a>
+  		{% endif %}
+  		<div class='caption'>
+            <h3><a href="{{ herb.get_absolute_url }}"> {{ herb.eng_name|truncatechars:20 }} </a> </h3>
+            <div>{{ herb.description|truncatechars:50 }}</div>
+        </div>
+    </div>
+
+  {% endfor %}
+  </div>
+ </div>
 </div>
 
 {% endblock main %}
