@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import os
 
+# from markdown_deux.conf.settings import MARKDOWN_DEUX_DEFAULT_STYLE
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -41,6 +43,8 @@ INSTALLED_APPS = [
     'browse',
     'search',
     'account',
+    'django_markdown',
+    'markdown_deux',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -131,3 +135,15 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn')
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media_cdn')
+
+
+MARKDOWN_DEUX_STYLES = {
+    "default": {
+        "extras": {
+            "code-friendly": None,
+        },
+        # Allow raw HTML (WARNING: don't use this for user-generated
+        # Markdown for your site!).
+        "safe_mode": False,
+    }
+}

@@ -8,16 +8,18 @@ from .models import Post
 # Create your views here.
 
 def posts_list(request):
+    page_title = "Natural Remedies"
     posts = Post.objects.all()
 
     search_query = request.GET.get('q')
     if search_query:
+        page_title = "Search results"
         posts = posts.filter(
             Q(title__icontains=search_query) |
             Q(content__icontains=search_query)
         ).distinct()
 
-    paginator = Paginator(posts, 2)
+    paginator = Paginator(posts, 1)
     page_var = 'page'
     page_no = request.GET.get(page_var)
 
@@ -29,7 +31,7 @@ def posts_list(request):
         posts = paginator.page(paginator.num_pages)
 
     context = {
-        'page_title': 'Natural Remedies',
+        'page_title': page_title,
         'paginator': paginator,
         'posts': posts,
         'page_var': page_var,
