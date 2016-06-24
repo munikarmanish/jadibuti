@@ -9,6 +9,7 @@ class HerbCategory (models.Model):
     def __str__(self):
         return name
 
+
 class Herb(models.Model):
     sci_name = models.CharField(max_length=50, null=True)
     eng_name = models.CharField(max_length=50)
@@ -22,8 +23,6 @@ class Herb(models.Model):
 
     category = models.ManyToManyField (HerbCategory)
 
-
     def get_absolute_url (self):
         #return '#'
     	return reverse('browse:herb', kwargs={'slug': self.id})
-

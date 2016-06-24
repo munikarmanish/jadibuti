@@ -5,6 +5,12 @@ from django.db.models import Q
 
 from .models import *
 
+def search_posts (search_query, posts):
+    sq = search_query.split ()
+    result = []
+
+    for s in sq:
+        result.append('hi')
 
 # Create your views here.
 
@@ -22,6 +28,9 @@ def posts_list(request):
 
     #posts = posts.filter(category)
     search_query = request.GET.get('q')
+
+    posts = search_posts (search_query, posts)
+
     if search_query:
         page_title = "Search results"
         posts = posts.filter(

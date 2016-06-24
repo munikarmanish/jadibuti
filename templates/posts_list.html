@@ -31,11 +31,13 @@
       <div class="col-sm-12">
 
         <div class="thumbnail">
+        
           {% if post.image %}
           <a href="{{ post.get_absolute_url }}">
             <img src='{{ post.image.url }}' class='img-responsive'>
           </a>
           {% endif %}
+
           <div class='caption'>
             <h3><a href="{{ post.get_absolute_url }}"> {{ post.title|truncatechars:30 }} </a> </h3>
             <small>Posted on {{ post.created|date }}.</small>
