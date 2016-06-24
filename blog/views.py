@@ -6,7 +6,16 @@ from django.db.models import Q
 from .models import *
 
 
+def search_posts(search_query, posts):
+    sq = search_query.split()
+    result = []
+
+    for s in sq:
+        result.append('hi')
+
+
 # Create your views here.
+
 
 def posts_list(request):
     page_title = "Natural Remedies"
@@ -30,13 +39,15 @@ def posts_list(request):
             if something not in unique_query_list:
                 unique_query_list.append(something)
         splitted_search_query = unique_query_list
+
         page_title = "Search results"
         posts = posts.filter(
             Q(title__icontains=search_query) |
             Q(content__icontains=search_query)
         ).distinct()
-    if not posts:
-        for word in splitted_search_query:
+
+    if not posts and search_query:
+        for words in splitted_search_query:
             posts = Post.objects.all()
             posts = posts.filter(Q(title__icontains=word) | Q(
                 content__icontains=word)).distinct()
