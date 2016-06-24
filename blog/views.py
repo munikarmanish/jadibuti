@@ -2,8 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
-from .models import Post
-from .models import Category
+
+from .models import *
 
 
 # Create your views here.
@@ -11,6 +11,8 @@ from .models import Category
 def posts_list(request):
     page_title = "Natural Remedies"
     posts = Post.objects.all()
+    total_posts = posts.count()
+    categories = Category.objects.all()
 
     # all categories to list in side panel
     # make categories a list of category string
@@ -43,6 +45,8 @@ def posts_list(request):
         'categories':categories,
         'paginator': paginator,
         'posts': posts,
+        'total_posts': total_posts,
+        'categories': categories,
         'page_var': page_var,
     }
     return render(request, 'posts_list.html', context)

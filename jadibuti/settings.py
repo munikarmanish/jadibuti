@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'browse',
     'search',
     'account',
-    'django_markdown',
     'markdown_deux',
 ]
 
