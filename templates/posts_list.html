@@ -14,16 +14,47 @@
 {% endblock page_header %}
 
 {% block main %}
+
+<!---{%for i in splitted_search_query %}
+<h2>{{i}}</h2>
+{%endfor %} --->
 <div class="container">
 <div class="row">
-
-  <div class="col-md-8">
-    {% if not posts and request.GET.q %}
+  {% if query_list %}
+    {% for i in query_list %}
+<!---        <h2>{{i}}</h2> --->
+      {% for k in i %}
       <div class="row">
       <div class="col-sm-12">
-        <h3>No Result Found</h3>
+
+        <div class="thumbnail">
+          {% if k.image %}
+          <a href="{{ k.get_absolute_url }}">
+            <img src='{{ k.image.url }}' class='img-responsive'>
+          </a>
+          {% endif %}
+          <div class='caption'>
+            <h3><a href="{{ k.get_absolute_url }}"> {{ k.title|truncatechars:30 }} </a> </h3>
+            <small>Posted on {{ k.created|date }}.</small><small>Posted on {{ k.created|date }}.</small>
+            <div>{{ k.summary }}</div>
+          </div><!--caption-->
+        </div><!--thumbnail-->
+
       </div><!--col-->
-      </div><!--row-->
+    </div><!---row-->
+      {% endfor%}
+    {% endfor %}
+  {% endif %}
+
+  <div class="col-md-8">
+    {% if not query_list %}
+      {% if not posts and request.GET.q %}
+        <div class="row">
+          <div class="col-sm-12">
+            <h3>No Result Found</h3>
+          </div><!--col-->
+        </div><!--row-->
+      {% endif %}
     {% endif %}
 
     {% for post in posts %}
@@ -40,7 +71,7 @@
 
           <div class='caption'>
             <h3><a href="{{ post.get_absolute_url }}"> {{ post.title|truncatechars:30 }} </a> </h3>
-            <small>Posted on {{ post.created|date }}.</small>
+            <small>Posted on {{ post.created|date }}.</small><small>Posted on {{ post.created|date }}.</small>
             <div>{{ post.summary }}</div>
           </div><!--caption-->
         </div><!--thumbnail-->
