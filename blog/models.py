@@ -44,6 +44,8 @@ class Post(models.Model):
     def rating(self):
         r = 0
         reviews = self.reviews()
+        if len(reviews) == 0:
+            return 0
         for review in reviews:
             r += review.star
         return r / len(reviews)
