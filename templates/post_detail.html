@@ -28,6 +28,14 @@
     <hr>
     {% endif %}
 
+    {% if post.herbs %}
+    <div class="herbs">
+        {% for h in post.herbs.all %}
+        <a href="{{ h.get_absolute_url }}"><span class="label label-default">{{ h.eng_name }}</span></a>
+        {% endfor %}
+    </div>
+    {% endif %}
+
     <div class="content">
         {{ post.content|markdown }}
         <hr>

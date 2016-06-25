@@ -12,7 +12,7 @@ def home_view (request):
 
 	context = {
 		'carousel_data':carousel_data,
-		'page_title':'home',
+		'page_title':'Home',
 		'd_range':d_range,
 		'marked_active':False,
 		'zipped_data':zipped,

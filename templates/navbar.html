@@ -20,6 +20,7 @@
             <li><a href="{% url 'blog:list' %}">Natural Remedies</a></li>
         </ul>
 
+        {% if page_title != 'Home' %}
         <form class="navbar-form navbar-left" role="search" method="get" action="{% url 'blog:list' %}">
             <div class="input-group">
                 <input type="search" class="form-control" placeholder="Search" name="q"
@@ -34,6 +35,7 @@
                 </span>
             </div>
         </form>
+        {% endif %}
 
         <ul class="nav navbar-nav navbar-right">
           {% if request.user.is_authenticated %} 

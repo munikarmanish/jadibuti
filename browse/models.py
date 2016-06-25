@@ -22,7 +22,7 @@ class Herb(models.Model):
     width_field = models.IntegerField(default=0)
     description = models.TextField(null=True, blank=True)
 
-    category = models.ManyToManyField(HerbCategory)
+    categories = models.ManyToManyField(HerbCategory)
 
     def __str__(self):
         return self.eng_name
