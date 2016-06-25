@@ -6,7 +6,16 @@ from django.db.models import Q
 from .models import *
 
 
+def search_posts(search_query, posts):
+    sq = search_query.split()
+    result = []
+
+    for s in sq:
+        result.append('hi')
+
+
 # Create your views here.
+
 
 def posts_list(request):
     page_title = "Natural Remedies"
@@ -16,12 +25,14 @@ def posts_list(request):
     query_list =[]
     unique_query_list=[]
     test = 1
+    query_list = []
+    unique_query_list = []
+    splitted_search_query = []
 
     # all categories to list in side panel
     # make categories a list of category string
     # to make it different from category of database
-    categories = Category.objects.all()
-    category_selected = request.GET.get('category')
+    categories = Category.objects.all().order_by('name')
 
     #posts = posts.filter(category)
     search_query = request.GET.get('q')
@@ -32,21 +43,34 @@ def posts_list(request):
             unique_query_list.append(something)
     splitted_search_query = unique_query_list
     if search_query:
+        # splitted_search_query=[]
+        splitted_search_query = search_query.split(" ")
+        for something in splitted_search_query:
+            if something not in unique_query_list:
+                unique_query_list.append(something)
+        splitted_search_query = unique_query_list
+
         page_title = "Search results"
         posts = posts.filter(
             Q(title__icontains=search_query) |
             Q(content__icontains=search_query)
         ).distinct()
-    if not posts:
+
+    if not posts and search_query:
         for words in splitted_search_query:
             posts = Post.objects.all()
-            posts = posts.filter(Q(title__icontains=words) | Q(content__icontains=words)).distinct()
+            posts = posts.filter(Q(title__icontains=word) | Q(
+                content__icontains=word)).distinct()
             query_list.append(posts)
         test = 0
 
 
+    # filter category as well
+    category_id = request.GET.get('c')
+    if category_id:
+        posts = posts.filter(categories__id=category_id)
 
-    paginator = Paginator(posts, 6)
+    paginator = Paginator(posts, 2)
     page_var = 'page'
     page_no = request.GET.get(page_var)
 
@@ -59,11 +83,10 @@ def posts_list(request):
 
     context = {
         'page_title': page_title,
-        'categories':categories,
+        'categories': categories,
         'paginator': paginator,
         'posts': posts,
         'total_posts': total_posts,
-        'categories': categories,
         'page_var': page_var,
         'splitted_search_query':splitted_search_query,
         'query_list': query_list,

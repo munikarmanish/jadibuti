@@ -66,15 +66,16 @@
       <div class="col-sm-12">
 
         <div class="thumbnail">
+        
           {% if post.image %}
           <a href="{{ post.get_absolute_url }}">
             <img src='{{ post.image.url }}' class='img-responsive'>
           </a>
           {% endif %}
+
           <div class='caption'>
             <h3><a href="{{ post.get_absolute_url }}"> {{ post.title|truncatechars:30 }} </a> </h3>
-            <small>Posted on {{ post.created|date }}.</small><small>Posted on {{ post.created|date }}.</small>
-            <div>{{ post.summary }}</div>
+            <p>{{ post.summary }}</p>
           </div><!--caption-->
         </div><!--thumbnail-->
 
@@ -91,7 +92,7 @@
           <ul class="pagination">
             {% if posts.has_previous %}
             <li>
-              <a href='?{{ page_var }}={{ posts.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}'>
+              <a href='?{{ page_var }}={{ posts.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.c %}&c={{ request.GET.c }}{% endif %}'>
                 <span class="glyphicon glyphicon-chevron-left" ></span>
               </a>
             <li>
@@ -106,7 +107,7 @@
             {% for n in paginator.page_range %}
 
             <li class="{% if posts.number == n %}active{% endif %}">
-              <a href="?{{ page_var }}={{ n }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
+              <a href="?{{ page_var }}={{ n }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.c %}&c={{ request.GET.c }}{% endif %}">
                 {{ n }}
               </a>
             </li>
@@ -115,7 +116,7 @@
 
             {% if posts.has_next %}
             <li>
-              <a href='?{{ page_var }}={{ posts.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}'>
+              <a href='?{{ page_var }}={{ posts.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.c %}&c={{ request.GET.c }}{% endif %}'>
                 <span class="glyphicon glyphicon-chevron-right" ></span>
               </a>
             </li>
@@ -145,8 +146,8 @@
           <a class="list-group-item" href="{% url 'blog:list' %}">All
             <span class="label label-default pull-right">{{ total_posts }}</span></a>
         {% for c in categories %}
-          <a class="list-group-item{% if request.GET.c == c.id %} active{% endif %}"
-            href="">
+          <a class="list-group-item{% if category_selected == c.id %} active{% endif %}"
+            href="?c={{ c.id }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
             {{ c.name }} <span class="label label-default pull-right">{{ c.post_set.all|length }}</span>
           </a>
         {% endfor %}
