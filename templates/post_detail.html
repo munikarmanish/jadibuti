@@ -67,7 +67,7 @@
 
     {% for r in post.reviews %}
     <div class="reviews well">
-        <h4>{{ r.user }} <span class="label label-success">{{ r.star }}</span> <small>wrote on {{ r.created|date }}:</small></h4>
+        <h4>{{ r.user.get_full_name }} <span class="label label-success">{{ r.star }}</span> <small>wrote on {{ r.created|date }}:</small></h4>
         <p>{{ r.comment|linebreaks }}</p>
     </div>
     {% endfor %}
