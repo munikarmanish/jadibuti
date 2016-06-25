@@ -45,17 +45,16 @@ class Herb(models.Model):
     width_field = models.IntegerField(default=0)
     description = models.TextField(null=True, blank=True)
 
-    category = models.ForeignKey(HerbCategory)
+    categories = models.ManyToManyField (HerbCategory, blank=True)
 
     shops = models.ManyToManyField(HerbShop, blank=True)
-
-    #curable_diseases = models.ManyToManyField(Disease, blank=True)
 
     def get_absolute_url(self):
         return reverse('browse:herb', kwargs={'slug': self.id})
 
     def __str__(self):
         return self.eng_name
+
 
 class Yoga (models.Model):
     name = models.CharField(max_length=100, null=True, blank=True)
@@ -84,6 +83,7 @@ class Symptom (models.Model):
 
 class Disease(models.Model):
     name = models.CharField(max_length=255)
+
     herbs = models.ManyToManyField (Herb)
 
     symptoms = models.ManyToManyField(Symptom)

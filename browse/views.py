@@ -7,8 +7,9 @@ from .models import *
 def herbs_list (response):
 
 	herbs = Herb.objects.all()
-	herb_categories = HerbCategory.objects.all()
 	total_herbs = herbs.count()
+	herb_categories = HerbCategory.objects.all()
+
 	#individual_cat_count = []
 	#for cat in herb_categories:
 	#	individual_cat_count.append(herbs.filter(category=cat).count())
@@ -28,7 +29,7 @@ def yoga_list (response):
 	yogas = Yoga.objects.all()
 
 	context = {
-		'page_title':'yoga',
+		'page_title':'Yoga',
 		'yogas':yogas,
 	}
 
@@ -39,7 +40,7 @@ def yoga_detail (response,slug):
 	yoga = get_object_or_404(Yoga, id=slug)
 
 	context = {
-		'page_title':'yoga',
+		'page_title':'Yoga',
 		'yoga':yoga,
 	}
 

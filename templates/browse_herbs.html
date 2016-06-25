@@ -23,31 +23,32 @@
 <div class="row">
 <div class="col-sm-8">
 <div class="panel panel-default">
-{% if herbs %}
+
   {% for herb in herbs %}
   	<div class="thumbnail">
   		{% if herb.image %}
   			<a href="{{ herb.get_absolute_url }}">
             <img src='{{ herb.image.url }}' class='img-responsive'>
             </a>
-  		{% endif %}
+      {% endif %}
   		<div class='caption'>
             <h3><a href="{{ herb.get_absolute_url }}"> {{ herb.eng_name|truncatechars:20 }} </a> </h3>
             <div>{{ herb.description|truncatechars:50 }}</div>
         </div>
     </div>
   {% endfor %}
-{% endif %}
+
   </div><!--panel-->
 }
 </div><!--column-1-->
+
+
 <div class="col-md-4">
 <div class="panel panel-default">
     <div class="panel-heading">
       Categories
     </div><!--panel-heading-->
     <div class="panel-body" style="padding:0;">
-    {% comment %}
       <ul class="list-group" style="margin:0;">
           <a class="list-group-item" href="{% url 'browse:herbs' %}">All
             <span class="label label-default pull-right">{{ total_herbs }}</span></a>
@@ -57,10 +58,10 @@
           </a>
         {% endfor %}
       </ul>
-      {% comment %}
     </div><!--panel-body-->
 </div><!--panel-->
 </div><!--column 2-->
+
 </div><!--row-->
 </div><!--container-->
 
