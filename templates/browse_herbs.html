@@ -21,10 +21,9 @@
 
 <div class="container">
 <div class="row">
-  
-  <div class="col-sm-8">
 
   {% for herb in herbs %}
+  <div class="col-sm-6">
   	<div class="thumbnail">
   		{% if herb.image %}
   			<a href="{{ herb.get_absolute_url }}">
@@ -36,11 +35,12 @@
             <div>{{ herb.description|truncatechars:50 }}</div>
         </div>
     </div>
+  </div><!--col-->
   {% endfor %}
 
-  </div><!--col-->
 
 
+{% comment %}
   <div class="col-sm-4">
   <div class="panel panel-default">
       <div class="panel-heading">
@@ -59,7 +59,7 @@
       </div><!--panel-body-->
   </div><!--panel-->
   </div><!--column 2-->
-
+  {% endcomment %}
 </div><!--row-->
 </div><!--container-->
 
