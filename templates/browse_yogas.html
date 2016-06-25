@@ -14,5 +14,27 @@
 {% endblock page_header %}
 
 {% block main %}
-
+<div class="container">
+	<div class="row">
+		<div class="col-sm-8">
+			<div class="panel panel-default">
+			{% for yoga in yogas %}
+				{% if yoga.image %}
+				<a href="{{ yoga.get_absolute_url }}">
+					<img src="{{ yoga.image.url }}" class="img-responsive">
+				</a>
+				{% endif %}
+			{% endfor %}
+			<div class="caption">
+				<a href="{{ yoga.get_absolute_url }}">
+				<h3>{{ yoga.name }}</h3>
+				</a>
+				<div>
+					{{ yoga.description|truncatechars:30 }}
+				</div>
+			</div>
+			</div>
+		</div>
+	</div>
+</div>
 {% endblock main %}

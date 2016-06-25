@@ -24,17 +24,23 @@ def herbs_list (response):
 	return render (response, 'browse_herbs.html', context)
 
 def yoga_list (response):
+	
+	yogas = Yoga.objects.all()
 
 	context = {
 		'page_title':'yoga',
+		'yogas':yogas,
 	}
 
 	return render(response, 'browse_yogas.html', context)
 
-def yoga_detail (response):
+def yoga_detail (response,slug):
+
+	yoga = get_object_or_404(Yoga, id=slug)
 
 	context = {
 		'page_title':'yoga',
+		'yoga':yoga,
 	}
 
 	return render(response, 'yoga_detail.html', context)

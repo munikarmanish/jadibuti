@@ -54,6 +54,15 @@ class DiseaseModelAdmin (admin.ModelAdmin):
     class Meta:
         model = Disease
 
+class YogaModelAdmin (admin.ModelAdmin):
+    list_display = ['name']
+    list_display_links = ['name']
+    search_fields = ['name','description']
+
+    class Meta:
+        model = Yoga
+
+admin.site.register(Yoga, YogaModelAdmin)
 admin.site.register(Symptom, SymptomModelAdmin)
 admin.site.register(Disease, DiseaseModelAdmin)
 admin.site.register(HerbShop, HerbShopModelAdmin)
