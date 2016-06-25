@@ -32,6 +32,7 @@
     </div><!--column 1-->
 
 <div class="col-md-4">
+<div class="row">
   <div class="panel panel-default">
     <div class="panel-heading">
       Available in
@@ -43,10 +44,23 @@
             {{ shop.name }} <span class="label label-default pull-right">{{ shop.location }}</span>
         </a>
         {% endfor %}
-
       </ul>
     </div><!--panel-body-->
   </div><!--panel-->
+  <div class="panel panel-default">
+    <div class="panel-heading">
+    Used for (Diseases)
+    </div>
+    <div class="panel-body" style="padding:0;">
+        <ul class="list-group" style="padding:0;">
+        {% for disease in diseases_cured %}
+            <a href="#">
+            {{ disease.name }}
+            </a>
+        {% endfor %}
+        </ul>
+    </div>
+  </div>
   </div><!--col 2-->
 </div><!--row-->
 </div><!--container-->

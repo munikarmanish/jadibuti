@@ -19,10 +19,13 @@ def herb_detail (response,slug):
 	
 	herb = get_object_or_404(Herb, id=slug)
 	shops = herb.shops.all()
+	diseases_cured = herb.disease_set.all()
+
 	context = {
 		'page_title':'herb_detail',
 		'herb':herb,
 		'available_in':shops,
+		'diseases_cured':diseases_cured
 	}
 
 	return render (response, 'herb_detail.html', context)
