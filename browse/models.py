@@ -53,10 +53,15 @@ class Herb(models.Model):
     def __str__(self):
         return self.eng_name
 
+class Symptom (models.Model):
+    name = models.CharField (max_length=100)
+
 class Disease(models.Model):
     name = models.CharField(max_length=255)
     herbs = models.ManyToManyField (Herb)
 
+    symptoms = models.ManyToManyField(Symptom)
+    
     def __str__(self):
         return name
 
