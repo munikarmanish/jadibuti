@@ -38,6 +38,24 @@ class HerbShopModelAdmin (admin.ModelAdmin):
     class Meta:
         model = HerbShop
 
+class SymptomModelAdmin (admin.ModelAdmin):
+    list_display = ['name']
+    list_display_links = ['name']
+    search_fields = ['name']
+
+    class Meta:
+        model = Symptom
+
+class DiseaseModelAdmin (admin.ModelAdmin):
+    list_display = ['name']
+    list_display_links = ['name']
+    search_fields = ['name']
+
+    class Meta:
+        model = Disease
+
+admin.site.register(Symptom, SymptomModelAdmin)
+admin.site.register(Disease, DiseaseModelAdmin)
 admin.site.register(HerbShop, HerbShopModelAdmin)
 admin.site.register(CarouselImage, CarouselImageModelAdmin)
 admin.site.register(Herb, HerbModelAdmin)

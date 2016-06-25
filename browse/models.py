@@ -56,15 +56,20 @@ class Herb(models.Model):
 class Symptom (models.Model):
     name = models.CharField (max_length=100)
 
+    def __str__(self):
+        return name
+
+
 class Disease(models.Model):
     name = models.CharField(max_length=255)
     herbs = models.ManyToManyField (Herb)
 
     symptoms = models.ManyToManyField(Symptom)
-    
+
     def __str__(self):
         return name
 
+    
 
 class CarouselImage (models.Model):
     show = models.BooleanField(null=False, default=True)
