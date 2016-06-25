@@ -9,16 +9,16 @@ def herbs_list (response):
 	herbs = Herb.objects.all()
 	herb_categories = HerbCategory.objects.all()
 	total_herbs = herbs.count()
-	individual_cat_count = []
-	for cat in herb_categories:
-		individual_cat_count.append(herbs.filter(category=cat).count())
-	zipped = zip(individual_cat_count,herb_categories)
+	#individual_cat_count = []
+	#for cat in herb_categories:
+	#	individual_cat_count.append(herbs.filter(category=cat).count())
+	#zipped = zip(individual_cat_count,herb_categories)
 
 	context = {
 		'page_title':'browse',
 		'herbs':herbs,
 		'total_herbs':total_herbs,
-		'count_categories': zipped
+		'categories': herb_categories,
 	}
 	
 	return render (response, 'browse_herbs.html', context)

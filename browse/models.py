@@ -46,7 +46,7 @@ class Herb(models.Model):
     width_field = models.IntegerField(default=0)
     description = models.TextField(null=True, blank=True)
 
-    categories = models.ManyToManyField(HerbCategory)
+    category = models.ForeignKey(HerbCategory)
 
     shops = models.ManyToManyField(HerbShop)
 
