@@ -9,6 +9,17 @@ class HerbCategory (models.Model):
     def __str__(self):
         return name
 
+class HerbShop (models.Model):
+    name = models.CharField(max_length=120)
+    location = models.CharField(null=False, blank=False)
+
+    longitude = models.FloatField (null=True, blank=True)
+    latitude = models.FloatField (null=True, blank=True)
+
+    #herbs = models.ManyToManyField (Herb)
+
+    def __str__():
+        return name
 
 class Herb(models.Model):
     sci_name = models.CharField(max_length=50, null=True)
@@ -21,10 +32,11 @@ class Herb(models.Model):
     width_field = models.IntegerField(default=0)
     description = models.TextField ()
 
+
     category = models.ManyToManyField (HerbCategory)
+    shops = models.ManyToManyField (HerbShop)
 
     def get_absolute_url (self):
-        #return '#'
     	return reverse('browse:herb', kwargs={'slug': self.id})
 
 
