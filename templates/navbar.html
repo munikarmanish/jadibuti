@@ -1,3 +1,5 @@
+{% load staticfiles %}
+
 <nav class="navbar navbar-default navbar-fixed-top">
 <div class="container">
 
@@ -9,7 +11,10 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="{% url 'home' %}">Jadibuti</a>
+        <a class="navbar-brand" href="{% url 'home' %}">
+            <img src="{% static 'jadibuti/img/icon.png' %}" class="pull-left" style="height:20px;margin-right:5px;">
+            <span>Jadibuti</span>
+        </a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
