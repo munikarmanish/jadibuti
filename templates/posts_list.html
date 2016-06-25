@@ -81,11 +81,22 @@
           {% endif %}
 
           <div class='caption'>
+
             <h3>
               <a href="{{ post.get_absolute_url }}">{{ post.title|truncatechars:30 }}</a>
   
             </h3>
+
+            {% if post.herbs %}
+            <p>
+              {% for h in post.herbs.all %}
+                <a href="{{ h.get_absolute_url }}"><span class="label label-default">{{ h.eng_name }}</span></a>
+              {% endfor %}
+            </p>
+            {% endif %}
+
             <p>{{ post.summary }}</p>
+
           </div><!--caption-->
         </div><!--thumbnail-->
 

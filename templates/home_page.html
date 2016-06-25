@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 
-{% block page_title %}Home{% endblock %}
+{% block page_title %}{{ page_title }}{% endblock %}
 
 {% block styles %}
 <link rel="stylesheet" href="{% static 'jadibuti/css/home_page.css' %}">
@@ -9,7 +9,28 @@
 
 {% block main %}
 
-<section id="carouse">
+<div class="jumbotron vpad" style="background:url({% static 'jadibuti/img/bg-herbs.jpg' %}) no-repeat center center; border-radius:0; background-size: cover;">
+<div class="container">
+<div class="text-center">
+
+	<h1>Welcome to the nature!</h1>
+
+	<h3>Search for any health problem and we'll try to find a natural solution for you.</h3>
+
+	<hr>
+
+	<form class="form-inline" action="{% url 'blog:list' %}" method="GET" role="search">
+		<input type="text" name="q" placeholder="Try searching 'acne', 'back pain', etc."
+			class="form-control input-lg" size="50">
+		<button type="submit" class="btn btn-default btn-lg">Search</button>
+	</form>
+
+</div><!--center-->
+</div><!--container-->
+</div><!--jumbotron-->
+
+{% comment %}
+<section id="carousel">
 <div class="container">
 	<div class="row">
 	<div class="col-sm-12">
@@ -50,26 +71,9 @@
 	</div><!--row-->
 </div><!--container-->
 </section><!--carousel-->
+{% endcomment %}
 
 
-<div class="container">
-<div class="jumbotron vpad" style="background:url({% static 'jadibuti/img/bg-herbs.jpg' %}) no-repeat center center; border-radius:0;">
-<div class="text-center">
 
-	<h1>Welcome to the nature!</h1>
-
-	<h3>Search for any health problem and we'll try to find a natural solution for you.</h3>
-
-	<hr>
-
-	<form class="form-inline" action="{% url 'blog:list' %}" method="GET" role="search">
-		<input type="text" name="q" placeholder="Try searching 'acne', 'back pain', etc."
-			class="form-control input-lg" size="50">
-		<button type="submit" class="btn btn-default btn-lg">Search</button>
-	</form>
-
-</div><!--center-->
-</div><!--jumbotron-->
-</div><!--container-->
 
 {% endblock main %}

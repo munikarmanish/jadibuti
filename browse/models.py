@@ -11,6 +11,19 @@ class HerbCategory (models.Model):
         return self.name
 
 
+class HerbShop (models.Model):
+    name = models.CharField(max_length=120)
+    location = models.CharField(max_length=250, null=False, blank=False)
+
+    longitude = models.FloatField(null=True, blank=True)
+    latitude = models.FloatField(null=True, blank=True)
+
+    #herbs = models.ManyToManyField (Herb)
+
+    def __str__():
+        return self.name
+
+
 class Herb(models.Model):
     sci_name = models.CharField(max_length=50, null=True, blank=True)
     eng_name = models.CharField(max_length=50)
@@ -22,13 +35,15 @@ class Herb(models.Model):
     width_field = models.IntegerField(default=0)
     description = models.TextField(null=True, blank=True)
 
-    category = models.ManyToManyField(HerbCategory)
+    categories = models.ManyToManyField(HerbCategory)
 
-    def __str__(self):
-        return self.eng_name
+    shops = models.ManyToManyField(HerbShop)
 
     def get_absolute_url(self):
         return reverse('browse:herb', kwargs={'slug': self.id})
+
+    def __str__(self):
+        return self.eng_name
 
 
 class Disease(models.Model):
