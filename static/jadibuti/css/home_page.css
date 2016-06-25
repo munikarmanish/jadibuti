@@ -1,7 +1,9 @@
 .jumbotron {
-    padding-top: 100px;
-    padding-bottom: 100px;
+    padding-top: 150px;
+    padding-bottom: 180px;
     border-radius: 0;
     color: white;
     text-shadow: #222 0.1em 0.1em 0.1em;
+    margin: 0;
+    background: rgba(0,0,0,0);
 }

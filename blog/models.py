@@ -5,6 +5,7 @@ from django.utils.text import slugify
 from django.db.models.signals import pre_save
 from django.contrib.auth.models import User
 from time import time
+from browse.models import *
 
 
 class Category(models.Model):
@@ -31,6 +32,7 @@ class Post(models.Model):
     tags = models.CharField(max_length=255)
     source = models.CharField(max_length=255)
     categories = models.ManyToManyField(Category)
+    herbs = models.ManyToManyField(Herb)
 
     def __str__(self):
         return self.title
@@ -79,7 +81,7 @@ class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     star = models.SmallIntegerField(choices=STAR_CHOICES, default=3)
-    comment = models.TextField(null=True)
+    comment = models.TextField(null=True, blank=True)
     created = models.DateTimeField(auto_now=True, auto_now_add=False)
 
     class Meta:

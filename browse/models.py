@@ -10,8 +10,10 @@ class HerbCategory (models.Model):
     def __str__(self):
         return self.name
 
+
 class HerbShop (models.Model):
     name = models.CharField(max_length=120)
+
     location = models.CharField(max_length=250,null=False, blank=False)
     image = models.ImageField(
         null=True, blank=True,
@@ -23,14 +25,15 @@ class HerbShop (models.Model):
 
     description = models.TextField (null=True, blank=True)
 
-    longitude = models.FloatField (null=True, blank=True)
-    latitude = models.FloatField (null=True, blank=True)
+    longitude = models.FloatField(null=True, blank=True)
+    latitude = models.FloatField(null=True, blank=True)
 
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
         return reverse('browse:shop',kwargs={'slug': self.id})
+
 
 class Herb(models.Model):
     sci_name = models.CharField(max_length=50, null=True, blank=True)
@@ -43,12 +46,12 @@ class Herb(models.Model):
     width_field = models.IntegerField(default=0)
     description = models.TextField(null=True, blank=True)
 
-    category = models.ManyToManyField(HerbCategory)
+    categories = models.ManyToManyField(HerbCategory)
 
-    shops = models.ManyToManyField (HerbShop)
+    shops = models.ManyToManyField(HerbShop)
 
-    def get_absolute_url (self):
-    	return reverse('browse:herb', kwargs={'slug': self.id})
+    def get_absolute_url(self):
+        return reverse('browse:herb', kwargs={'slug': self.id})
 
     def __str__(self):
         return self.eng_name

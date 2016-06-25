@@ -23,7 +23,7 @@
   {% endblock styles %}
 </head>
 
-<body>
+<body style="background:url({% block bg %}{% endblock %}) no-repeat center center; background-size:cover; background-attachment: fixed;">
   {% include 'navbar.html' %}
 
   {% include 'messages.html' %}

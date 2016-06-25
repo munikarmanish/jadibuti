@@ -19,8 +19,16 @@
             <li><a href="{% url 'browse:herbs'  %}">Browse Herbs</a></li>
             <li><a href="{% url 'browse:yogas' %}">Yoga</a></li>
             <li><a href="{% url 'blog:list' %}">Natural Remedies</a></li>
+
+            <li class="{% if page_title == 'Herbs' %}active {% endif %}">
+                <a href="{% url 'browse:browse'  %}">Herbs</a>
+            </li>
+            <li class="{% if page_title == 'Natural Remedies' %}active {% endif %}">
+                <a href="{% url 'blog:list' %}">Natural Remedies</a>
+            </li>
         </ul>
 
+        {% if page_title != 'Home' %}
         <form class="navbar-form navbar-left" role="search" method="get" action="{% url 'blog:list' %}">
             <div class="input-group">
                 <input type="search" class="form-control" placeholder="Search" name="q"
@@ -35,6 +43,7 @@
                 </span>
             </div>
         </form>
+        {% endif %}
 
         <ul class="nav navbar-nav navbar-right">
           {% if request.user.is_authenticated %} 
