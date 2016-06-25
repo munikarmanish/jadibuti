@@ -75,7 +75,7 @@ class Yoga (models.Model):
 class Symptom (models.Model):
     name = models.CharField (max_length=100)
 
-    yogas = models.ManyToManyField (Yoga)
+    yogas = models.ManyToManyField (Yoga,blank=True)
 
     def __str__(self):
         return self.name
@@ -84,7 +84,7 @@ class Symptom (models.Model):
 class Disease(models.Model):
     name = models.CharField(max_length=255)
 
-    herbs = models.ManyToManyField (Herb)
+    herbs = models.ManyToManyField (Herb,blank=True)
 
     symptoms = models.ManyToManyField(Symptom)
 
