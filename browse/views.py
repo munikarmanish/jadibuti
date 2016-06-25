@@ -16,7 +16,7 @@ def herbs_list (response):
 	#zipped = zip(individual_cat_count,herb_categories)
 
 	context = {
-		'page_title':'browse',
+		'page_title':'Herbs',
 		'herbs':herbs,
 		'total_herbs':total_herbs,
 		'categories': herb_categories,
