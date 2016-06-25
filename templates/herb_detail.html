@@ -3,15 +3,13 @@
 {% load markdown_deux_tags %}
 
 {% block page_title %}
-
-{{ post.title }}
-
+    {{ herb.eng_name }}
 {% endblock page_title %}
 
 {% block page_header %}
 <header>
 <div class="container">
-    <h1>{{ herb.eng_name }} | {{ herb.nep_name }}</h1>
+    <h1>{{ herb.eng_name }}{% if herb.nep_name %} | {{ herb.nep_name }}{% endif %}</h1>
     <hr>
 </div><!--container-->
 </header>

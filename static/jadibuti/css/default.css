@@ -22,3 +22,15 @@ nav.navbar, .well {
     border-left: none;
     border-right: none;
 }
+
+.text-shadow {
+    text-shadow: #222 1px 1px 1px;
+}
+
+.white-bg {
+    background: white;
+}
+
+.white-text {
+    color: white;
+}

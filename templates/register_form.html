@@ -1,9 +1,15 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 
 {% block page_title %}Login{% endblock page_title %}
 
+{% block bg %}
+    {% static 'jadibuti/img/bg-mushroom.jpg' %}
+{% endblock bg %}
+
 {% block main %}
-<div class="container vpad">
+<section class="vpad">
+<div class="container">
 <div class="row">
 <div class="col-sm-offset-4 col-sm-4">
 
@@ -60,4 +66,5 @@
 </div><!--col-->
 </div><!--row-->
 </div><!--container-->
+</section>
 {% endblock main %}

@@ -1,14 +1,18 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 
 {% block page_title %}
-{{ page_title }}
+  {{ page_title }}
 {% endblock page_title %}
 
-{% block page_header %}
+{% block bg %}
+  {% static 'jadibuti/img/bg-knife.jpg' %}
+{% endblock bg %}
 
+{% block page_header %}
 <header class="vpad-sm">
 <div class="container">
-  <h1>Browse</h1>
+  <h1 class="white-text text-shadow">Browse</h1>
 </div>
 </header>
 {% endblock page_header %}

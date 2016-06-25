@@ -1,8 +1,15 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 
 {% block page_title %}Login{% endblock page_title %}
 
+{% block bg %}
+    {% static 'jadibuti/img/bg-leaves.jpg' %}
+{% endblock bg %}
+
 {% block main %}
+
+<section class="vpad">
 <div class="container vpad">
 <div class="row">
 <div class="col-sm-offset-4 col-sm-4">
@@ -29,7 +36,13 @@
                 </div>
 
                 <!-- submit -->
-                <button type="submit" class="btn btn-lg btn-primary btn-block">Login</button>
+                <div>
+                    <button type="submit" class="btn btn-lg btn-primary btn-block">Login</button>
+                </div>
+
+                <div class="text-center">
+                    <a href="#">Forgot password?</a>
+                </div>
 
             </form>
 
@@ -42,4 +55,5 @@
 </div><!--col-->
 </div><!--row-->
 </div><!--container-->
+</section>
 {% endblock main %}
