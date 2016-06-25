@@ -39,9 +39,9 @@ class Herb(models.Model):
 
     categories = models.ManyToManyField(HerbCategory)
 
-    shops = models.ManyToManyField(HerbShop)
+    shops = models.ManyToManyField(HerbShop, blank=True)
 
-    disease = models.ManyToManyField(Disease)
+    curable_diseases = models.ManyToManyField(Disease, blank=True)
 
     def get_absolute_url(self):
         return reverse('browse:herb', kwargs={'slug': self.id})
