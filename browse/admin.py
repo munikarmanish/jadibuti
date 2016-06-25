@@ -29,7 +29,43 @@ class CarouselImageModelAdmin (admin.ModelAdmin):
     class Meta:
         model = CarouselImage
 
+class HerbShopModelAdmin (admin.ModelAdmin):
+    list_display = ['name','location']
+    list_display_links = ['name']
+    list_filter = ['location']
+    search_fields = ['name','location','description']
 
+    class Meta:
+        model = HerbShop
+
+class SymptomModelAdmin (admin.ModelAdmin):
+    list_display = ['name']
+    list_display_links = ['name']
+    search_fields = ['name']
+
+    class Meta:
+        model = Symptom
+
+class DiseaseModelAdmin (admin.ModelAdmin):
+    list_display = ['name']
+    list_display_links = ['name']
+    search_fields = ['name']
+
+    class Meta:
+        model = Disease
+
+class YogaModelAdmin (admin.ModelAdmin):
+    list_display = ['name']
+    list_display_links = ['name']
+    search_fields = ['name','description']
+
+    class Meta:
+        model = Yoga
+
+admin.site.register(Yoga, YogaModelAdmin)
+admin.site.register(Symptom, SymptomModelAdmin)
+admin.site.register(Disease, DiseaseModelAdmin)
+admin.site.register(HerbShop, HerbShopModelAdmin)
 admin.site.register(CarouselImage, CarouselImageModelAdmin)
 admin.site.register(Herb, HerbModelAdmin)
 admin.site.register (HerbCategory, HerbCategoryModelAdmin)

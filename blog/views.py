@@ -7,15 +7,6 @@ from django.contrib import messages
 from .models import *
 from .forms import *
 
-
-def search_posts(search_query, posts):
-    sq = search_query.split()
-    result = []
-
-    for s in sq:
-        result.append('hi')
-
-
 # Create your views here.
 
 
