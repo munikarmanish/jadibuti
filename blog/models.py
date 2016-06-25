@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse
 from django.utils import timezone
 from django.utils.text import slugify
 from django.db.models.signals import pre_save
+from django.contrib.auth.models import User
 from time import time
 
 
@@ -37,6 +38,20 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('blog:detail', kwargs={'slug': self.slug})
 
+    def reviews(self):
+        return self.review_set.all().order_by('-created')
+
+    def rating(self):
+        r = 0
+        reviews = self.reviews()
+
+        if reviews:
+            for review in reviews:
+                r += review.star
+            return r / len(reviews)
+        else:
+            return None
+
 
 def create_slug(instance):
     time_str = "".join(str(time()).split('.'))
@@ -51,3 +66,28 @@ def pre_save_post_receiver(sender, instance, *args, **kwargs):
 
 pre_save.connect(pre_save_post_receiver, sender=Post)
 
+
+STAR_CHOICES = (
+    (1, '1 Star'),
+    (2, '2 Star'),
+    (3, '3 Star'),
+    (4, '4 Star'),
+    (5, '5 Star'),
+)
+
+
+class Review(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    star = models.SmallIntegerField(choices=STAR_CHOICES, default=3)
+    comment = models.TextField(null=True)
+    created = models.DateTimeField(auto_now=True, auto_now_add=False)
+
+    class Meta:
+        unique_together = ("user", "post")
+
+    def __str__(self):
+        if len(self.comment) <= 30:
+            return self.comment
+        else:
+            return self.comment[0:27] + '...'

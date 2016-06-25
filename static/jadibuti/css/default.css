@@ -8,7 +8,8 @@ nav.navbar, .well {
 
 .jumbotron, .alert, .btn, .panel, .form-control, .well, .dropdown-menu, .thumbnail,
 .panel-heading, .panel-footer,
-.list-group, .list-group-item, .list-group-item:first-child, .list-group-item:last-child {
+.list-group, .list-group-item, .list-group-item:first-child, .list-group-item:last-child,
+.container {
     border-radius: 0;
 }
 

@@ -2,8 +2,10 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
+from django.contrib import messages
 
 from .models import *
+from .forms import *
 
 
 def search_posts(search_query, posts):
@@ -33,19 +35,13 @@ def posts_list(request):
 
     #posts = posts.filter(category)
     search_query = request.GET.get('q')
-    #splitted_search_query=[]
-    splitted_search_query = search_query.split(" ")
-    for something in splitted_search_query:
-        if something not in unique_query_list:
-            unique_query_list.append(something)
-    splitted_search_query = unique_query_list
     if search_query:
         # splitted_search_query=[]
-#        splitted_search_query = search_query.split(" ")
-#        for something in splitted_search_query:
-#            if something not in unique_query_list:
-#                unique_query_list.append(something)
-#        splitted_search_query = unique_query_list
+        splitted_search_query = search_query.split(" ")
+        for something in splitted_search_query:
+            if something not in unique_query_list:
+                unique_query_list.append(something)
+        splitted_search_query = unique_query_list
 
         page_title = "Search results"
         posts = posts.filter(
@@ -59,8 +55,6 @@ def posts_list(request):
             posts = posts.filter(Q(title__icontains=words) | Q(
                 content__icontains=words)).distinct()
             query_list.append(posts)
-        test = 0
-
 
     # filter category as well
 #    category_id = request.GET.get('c')
@@ -85,16 +79,42 @@ def posts_list(request):
         'posts': posts,
         'total_posts': total_posts,
         'page_var': page_var,
-        'splitted_search_query':splitted_search_query,
+        'splitted_search_query': splitted_search_query,
         'query_list': query_list,
-        'test':test
     }
+
+    if category_id:
+        context['category_selected'] = int(category_id)
+
     return render(request, 'posts_list.html', context)
 
 
 def post_detail(request, slug=None):
     post = get_object_or_404(Post, slug=slug)
-    context = {
-        'post': post,
-    }
+    context = {'post': post, }
+    form = ReviewForm(request.POST or None)
+    context['form'] = form
+
+    if request.method == "POST":
+        if form.is_valid():
+            user = request.user
+            star = form.cleaned_data.get('star')
+            comment = form.cleaned_data.get('comment')
+            review, is_created = Review.objects.get_or_create(
+                user=user, post=post, defaults={'star': star, 'comment': comment})
+            review.star = star
+            review.comment = comment
+            review.save()
+        else:
+            messages.error(request, "Invalid form data!")
+        return HttpResponseRedirect(post.get_absolute_url())
+
+    if request.user.is_authenticated():
+        reviews = post.reviews().filter(~Q(user__id=request.user.id))
+        context['reviews'] = reviews[0:5]
+        review = reviews.filter(user__id=request.user.id)
+        context['review'] = review
+    else:
+        context['reviews'] = post.reviews()[0:5]
+
     return render(request, 'post_detail.html', context)
