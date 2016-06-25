@@ -23,11 +23,9 @@ def posts_list(request):
     page_title = "Natural Remedies"
     posts = Post.objects.all()
     total_posts = posts.count()
-    categories = Category.objects.all()
-    query_list =[]
-    unique_query_list=[]
-    splitted_search_query=[]
-    test = 1
+    query_list = []
+    unique_query_list = []
+    splitted_search_query = []
 
     # all categories to list in side panel
     # make categories a list of category string
@@ -83,8 +81,8 @@ def posts_list(request):
         'query_list': query_list,
     }
 
-    #if category_id:
-    #    context['category_selected'] = int(category_id)
+    if category_id:
+        context['category_selected'] = int(category_id)
 
     return render(request, 'posts_list.html', context)
 

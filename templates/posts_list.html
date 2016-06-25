@@ -21,6 +21,7 @@
 
 {% block main %}
 
+{% comment %}
 <!---{%for i in splitted_search_query %}
 <h6>{{i}}</h6>
 {%endfor %}
@@ -67,6 +68,7 @@
       {% endfor%}
     {% endfor %}
   {% endif %}
+{% endcomment %}
 
 <div class="container">
 <div class="row">
@@ -98,7 +100,10 @@
 
             <h3>
               <a href="{{ post.get_absolute_url }}">{{ post.title|truncatechars:30 }}</a>
-
+              <span class="label label-success pull-right">
+                <span class="glyphicon glyphicon-star"></span>
+                {{ post.rating|floatformat:1 }}
+              </span>
             </h3>
               <p><i>Source: {{post.source}}</i></p>
             {% if post.herbs %}
