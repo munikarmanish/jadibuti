@@ -25,14 +25,11 @@ def posts_list(request):
     query_list =[]
     unique_query_list=[]
     test = 1
-    query_list = []
-    unique_query_list = []
-    splitted_search_query = []
 
     # all categories to list in side panel
     # make categories a list of category string
     # to make it different from category of database
-    categories = Category.objects.all().order_by('name')
+#    categories = Category.objects.all().order_by('name')
 
     #posts = posts.filter(category)
     search_query = request.GET.get('q')
@@ -44,11 +41,11 @@ def posts_list(request):
     splitted_search_query = unique_query_list
     if search_query:
         # splitted_search_query=[]
-        splitted_search_query = search_query.split(" ")
-        for something in splitted_search_query:
-            if something not in unique_query_list:
-                unique_query_list.append(something)
-        splitted_search_query = unique_query_list
+#        splitted_search_query = search_query.split(" ")
+#        for something in splitted_search_query:
+#            if something not in unique_query_list:
+#                unique_query_list.append(something)
+#        splitted_search_query = unique_query_list
 
         page_title = "Search results"
         posts = posts.filter(
@@ -66,11 +63,11 @@ def posts_list(request):
 
 
     # filter category as well
-    category_id = request.GET.get('c')
-    if category_id:
-        posts = posts.filter(categories__id=category_id)
+#    category_id = request.GET.get('c')
+#    if category_id:
+#        posts = posts.filter(categories__id=category_id)
 
-    paginator = Paginator(posts, 2)
+    paginator = Paginator(posts, 6)
     page_var = 'page'
     page_no = request.GET.get(page_var)
 

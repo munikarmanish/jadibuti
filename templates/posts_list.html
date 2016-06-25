@@ -15,17 +15,22 @@
 
 {% block main %}
 
-<!---{%for i in splitted_search_query %}
-<h2>{{i}}</h2>
-{%endfor %} --->
-<!---{%for i in posts %}
-<h2>{{i}}</h2>
-{%endfor %}--->
+{%for i in splitted_search_query %}
+<h6>{{i}}</h6>
+{%endfor %}
+<br>
+{%for i in posts %}
+<h6>{{i}}</h6>
+{%endfor %}
+<br>
+<h6>{{test}}</h6><br>
 <div class="container">
 <div class="row">
   {% if query_list %}
     {% for i in query_list %}
-<!---        <h2>{{i}}</h2> --->
+<!---        <h2>{{i}}</h2> query_list = []
+    unique_query_list = []query_list = []
+    unique_query_list = []--->
       {% for k in i %}
       <div class="row">
       <div class="col-sm-12">
@@ -66,7 +71,7 @@
       <div class="col-sm-12">
 
         <div class="thumbnail">
-        
+
           {% if post.image %}
           <a href="{{ post.get_absolute_url }}">
             <img src='{{ post.image.url }}' class='img-responsive'>
