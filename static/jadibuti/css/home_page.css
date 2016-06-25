@@ -1,0 +1,7 @@
+.jumbotron {
+    padding-top: 100px;
+    padding-bottom: 100px;
+    border-radius: 0;
+    color: white;
+    text-shadow: #222 0.1em 0.1em 0.1em;
+}
