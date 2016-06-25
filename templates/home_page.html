@@ -1,26 +1,33 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 
 {% block page_title %}Home{% endblock %}
 
+{% block styles %}
+<link rel="stylesheet" href="{% static 'jadibuti/css/home_page.css' %}">
+{% endblock styles %}
+
 {% block main %}
+
+<section id="carouse">
 <div class="container">
-<div class="row">
-<div class="col-sm-10 col-sm-offset-1">
+	<div class="row">
+	<div class="col-sm-12">
 	<div id='home_carousel' class="carousel slide" data-ride="carousel">
 		<ul class="carousel-indicators">
-		{% for i in d_range %}
+			{% for i in d_range %}
 			<li data-target="#home_carousel" data-slide-to = "{{ i }}" class="{% if i == 0 %}active{% endif %}"></li>
-		{% endfor %}
+			{% endfor %}
 
 		</ul>
 
 		<div class="carousel-inner">
-				
+
 			{% for i,data in zipped_data %}
-			
+
 			<div class="item {% if i == 0 %}active{% endif %}">
-				
-				<img src="{{ data.image.url }}" class="image-responsive" style="height:300;" alt="{{ data.description|truncatechars:15 }}">
+
+				<img src="{{ data.image.url }}" class="img-responsive" style="width:100%;" alt="{{ data.description|truncatechars:15 }}">
 
 				<div class="carousel-caption">
 					<h3>{{ data.caption }}</h3>
@@ -31,17 +38,38 @@
 		</div>
 
 		<a href="#home_carousel" class="left carousel-control" data-slide="prev">
-		<span class="icon-prev"></span>
+			<span class="glyphicon glyphicon-chevron-left"></span>
 		</a>
 
 		<a href="#home_carousel" class="right carousel-control" data-slide="next">
-		<span class="icon-next"></span>
+			<span class="glyphicon glyphicon-chevron-right"></span>
 		</a>
 
-	</div>
-
+	</div><!--carousel-->
+	</div><!--col-->
+	</div><!--row-->
 </div><!--container-->
-</div>
-</div>
+</section><!--carousel-->
+
+
+<div class="container">
+<div class="jumbotron vpad" style="background:url({% static 'jadibuti/img/bg-herbs.jpg' %}) no-repeat center center; border-radius:0;">
+<div class="text-center">
+
+	<h1>Welcome to the nature!</h1>
+
+	<h3>Search for any health problem and we'll try to find a natural solution for you.</h3>
+
+	<hr>
+
+	<form class="form-inline" action="{% url 'blog:list' %}" method="GET" role="search">
+		<input type="text" name="q" placeholder="Try searching 'acne', 'back pain', etc."
+			class="form-control input-lg" size="50">
+		<button type="submit" class="btn btn-default btn-lg">Search</button>
+	</form>
+
+</div><!--center-->
+</div><!--jumbotron-->
+</div><!--container-->
 
 {% endblock main %}
