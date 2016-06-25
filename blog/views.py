@@ -80,9 +80,11 @@ def posts_list(request):
         'page_var': page_var,
         'splitted_search_query': splitted_search_query,
         'query_list': query_list,
-        'category_selected': category_id,
     }
-    
+
+    if category_id:
+        context['category_selected'] = int(category_id)
+
     return render(request, 'posts_list.html', context)
 
 
