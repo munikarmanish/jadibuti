@@ -69,7 +69,6 @@
 		<div class="carousel-inner">
 
 			{% for i,data in zipped_data %}
-
 			<div class="item {% if i == 0 %}active{% endif %}">
 
 				<img src="{{ data.image.url }}" class="img-responsive" style="width:100%;" alt="{{ data.description|truncatechars:15 }}">
