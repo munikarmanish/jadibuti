@@ -35,13 +35,15 @@ def posts_list(request):
 
     #posts = posts.filter(category)
     search_query = request.GET.get('q')
+    #splitted_search_query=[]
+    splitted_search_query = search_query.split(" ")
+    for something in splitted_search_query:
+        if something not in unique_query_list:
+            unique_query_list.append(something)
+    splitted_search_query = unique_query_list
     if search_query:
         # splitted_search_query=[]
-        splitted_search_query = search_query.split(" ")
-        for something in splitted_search_query:
-            if something not in unique_query_list:
-                unique_query_list.append(something)
-        splitted_search_query = unique_query_list
+
 
         page_title = "Search results"
         posts = posts.filter(
@@ -57,9 +59,9 @@ def posts_list(request):
             query_list.append(posts)
 
     # filter category as well
-#    category_id = request.GET.get('c')
-#    if category_id:
-#        posts = posts.filter(categories__id=category_id)
+    #category_id = request.GET.get('c')
+    #if category_id:
+    #    posts = posts.filter(categories__id=category_id)
 
     paginator = Paginator(posts, 6)
     page_var = 'page'
@@ -83,8 +85,8 @@ def posts_list(request):
         'query_list': query_list,
     }
 
-    if category_id:
-        context['category_selected'] = int(category_id)
+    #if category_id:
+    #    context['category_selected'] = int(category_id)
 
     return render(request, 'posts_list.html', context)
 
