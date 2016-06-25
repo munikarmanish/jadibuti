@@ -17,9 +17,8 @@
 
 <div class="container">
 <div class="row">
-
-  <div class="col-md-8">
-
+<div class="col-md-8">
+<div class="panel panel-default">
   {% for herb in herbs %}
   	<div class="thumbnail">
   		{% if herb.image %}
@@ -34,8 +33,27 @@
     </div>
   {% endfor %}
 
-  </div>
- </div>
-</div>
+  </div><!--panel-->
+</div><!--column-1-->
+<div class="col-md-4">
+<div class="panel panel-default">
+    <div class="panel-heading">
+      Categories
+    </div><!--panel-heading-->
+    <div class="panel-body" style="padding:0;">
+      <ul class="list-group" style="margin:0;">
+          <a class="list-group-item" href="{% url 'browse:browse' %}">All
+            <span class="label label-default pull-right">{{ total_herbs }}</span></a>
+        {% for count,cat in count_categories %}
+          <a class="list-group-item" href="#">
+          {{ cat.name }} <span class="label label-default pull-right">{{ count }}</span>
+          </a>
+        {% endfor %}
+      </ul>
+    </div><!--panel-body-->
+</div><!--panel-->
+</div><!--column 2-->
+</div><!--row-->
+</div><!--container-->
 
 {% endblock main %}

@@ -21,6 +21,7 @@
 <div class="container col-md-12">
 <div class="row">
     <div class="col-md-8">
+<div class="panel panel-default">
     {% if herb.image %}
     <img src="{{ herb.image.url }}" class="image-responsive" />
     <hr>
@@ -29,8 +30,8 @@
     <div class="content">
     {{ herb.description|markdown }}
     </div><!--content-->
+</div><!--panel-->
     </div><!--column 1-->
-
 <div class="col-md-4">
 <div class="row">
   <div class="panel panel-default">
@@ -54,7 +55,7 @@
     <div class="panel-body" style="padding:0;">
         <ul class="list-group" style="padding:0;">
         {% for disease in diseases_cured %}
-            <a href="#">
+            <a href="#" class="list-group-item">
             {{ disease.name }}
             </a>
         {% endfor %}
