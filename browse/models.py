@@ -12,8 +12,8 @@ class HerbCategory (models.Model):
 
 
 class HerbShop (models.Model):
-    name = models.CharField(max_length=100)
-    location = models.CharField(null=False, blank=False, max_length=100)
+    name = models.CharField(max_length=120)
+    location = models.CharField(max_length=250, null=False, blank=False)
 
     longitude = models.FloatField(null=True, blank=True)
     latitude = models.FloatField(null=True, blank=True)
