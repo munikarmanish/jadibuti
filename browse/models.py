@@ -23,6 +23,8 @@ class HerbShop (models.Model):
     def __str__():
         return self.name
 
+class Disease(models.Model):
+    name = models.CharField(max_length=255)
 
 class Herb(models.Model):
     sci_name = models.CharField(max_length=50, null=True, blank=True)
@@ -39,16 +41,13 @@ class Herb(models.Model):
 
     shops = models.ManyToManyField(HerbShop)
 
+    disease = models.ManyToManyField(Disease)
+
     def get_absolute_url(self):
         return reverse('browse:herb', kwargs={'slug': self.id})
 
     def __str__(self):
         return self.eng_name
-
-
-class Disease(models.Model):
-    name = models.CharField(max_length=255)
-
 
 class CarouselImage (models.Model):
     show = models.BooleanField(null=False, default=True)
