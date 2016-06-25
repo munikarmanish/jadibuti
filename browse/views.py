@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404
 
 from .models import *
 
-def browse_view (response):
+def herbs_list (response):
 
 	herbs = Herb.objects.all()
 	herb_categories = HerbCategory.objects.all()
@@ -22,6 +22,24 @@ def browse_view (response):
 	}
 	
 	return render (response, 'browse_herbs.html', context)
+
+def yoga_list (response):
+
+	context = {
+		'page_title':'yoga',
+	}
+
+	return render(response, 'browse_yogas.html', context)
+
+def yoga_detail (response):
+
+	context = {
+		'page_title':'yoga',
+	}
+
+	return render(response, 'yoga_detail.html', context)
+
+
 
 def herb_detail (response,slug):
 	
