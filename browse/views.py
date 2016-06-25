@@ -16,16 +16,16 @@ def herbs_list (response):
 	#zipped = zip(individual_cat_count,herb_categories)
 
 	context = {
-		'page_title':'browse',
+		'page_title':'Herbs',
 		'herbs':herbs,
 		'total_herbs':total_herbs,
 		'categories': herb_categories,
 	}
-	
+
 	return render (response, 'browse_herbs.html', context)
 
 def yoga_list (response):
-	
+
 	yogas = Yoga.objects.all()
 
 	context = {
@@ -49,7 +49,7 @@ def yoga_detail (response,slug):
 
 
 def herb_detail (response,slug):
-	
+
 	herb = get_object_or_404(Herb, id=slug)
 	shops = herb.shops.all()
 	diseases_cured = herb.disease_set.all()
@@ -64,7 +64,7 @@ def herb_detail (response,slug):
 	return render (response, 'herb_detail.html', context)
 
 def shop_detail(response, slug):
-	
+
 	shop = get_object_or_404 (HerbShop, id=slug)
 	available_herbs = shop.herb_set.all()
 
