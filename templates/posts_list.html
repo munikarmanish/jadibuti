@@ -49,7 +49,14 @@
           {% endif %}
           <div class='caption'>
             <h3><a href="{{ k.get_absolute_url }}"> {{ k.title|truncatechars:30 }} </a> </h3>
-            <small>Source{{k.source}}</small><br>
+            <p><i>Source: {{k.source}}</i></p>
+          {% if k.herbs %}
+          <p>
+            {% for h in k.herbs.all %}
+              <a href="{{ h.get_absolute_url }}"><span class="label label-default">{{ h.eng_name }}</span></a>
+            {% endfor %}
+          </p>
+          {% endif %}
             <small>Posted on {{ k.created|date }}.</small><small>Posted on {{ k.created|date }}.</small>
             <div>{{ k.summary }}</div>
           </div><!--caption-->
@@ -93,7 +100,7 @@
               <a href="{{ post.get_absolute_url }}">{{ post.title|truncatechars:30 }}</a>
 
             </h3>
-
+              <p><i>Source: {{post.source}}</i></p>
             {% if post.herbs %}
             <p>
               {% for h in post.herbs.all %}
