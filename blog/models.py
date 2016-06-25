@@ -77,7 +77,6 @@ STAR_CHOICES = (
     (5, '5 Star'),
 )
 
-
 class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
