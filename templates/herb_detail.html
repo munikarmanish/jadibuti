@@ -18,8 +18,9 @@
 {% endblock page_header %}
 
 {% block main %}
-<div class="container">
-
+<div class="container col-md-12">
+<div class="row">
+    <div class="col-md-8">
     {% if herb.image %}
     <img src="{{ herb.image.url }}" class="image-responsive" />
     <hr>
@@ -28,7 +29,26 @@
     <div class="content">
     {{ herb.description|markdown }}
     </div><!--content-->
+    </div><!--column 1-->
 
-    <hr>
+<div class="col-md-4">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      Available in
+    </div><!--panel-heading-->
+    <div class="panel-body" style="padding:0;">
+      <ul class="list-group" style="margin:0;">
+        {% for shop in available_in %}
+        <a href="{{ shop.get_absolute_url }}" class="list-group-item">
+            {{ shop.name }} <span class="label label-default pull-right">{{ shop.location }}</span>
+        </a>
+        {% endfor %}
+
+      </ul>
+    </div><!--panel-body-->
+  </div><!--panel-->
+  </div><!--col 2-->
+</div><!--row-->
 </div><!--container-->
+
 {% endblock main %}

@@ -29,7 +29,16 @@ class CarouselImageModelAdmin (admin.ModelAdmin):
     class Meta:
         model = CarouselImage
 
+class HerbShopModelAdmin (admin.ModelAdmin):
+    list_display = ['name','location']
+    list_display_links = ['name']
+    list_filter = ['location']
+    search_fields = ['name','location','description']
 
+    class Meta:
+        model = HerbShop
+
+admin.site.register(HerbShop, HerbShopModelAdmin)
 admin.site.register(CarouselImage, CarouselImageModelAdmin)
 admin.site.register(Herb, HerbModelAdmin)
 admin.site.register (HerbCategory, HerbCategoryModelAdmin)

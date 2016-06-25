@@ -18,10 +18,24 @@ def browse_view (response):
 def herb_detail (response,slug):
 	
 	herb = get_object_or_404(Herb, id=slug)
-
+	shops = herb.shops.all()
 	context = {
 		'page_title':'herb_detail',
-		'herb':herb
+		'herb':herb,
+		'available_in':shops,
 	}
 
 	return render (response, 'herb_detail.html', context)
+
+def shop_detail(response, slug):
+	
+	shop = get_object_or_404 (HerbShop, id=slug)
+	available_herbs = shop.herb_set.all()
+
+	context = {
+		'page_title':shop.name,
+		'shop':shop,
+		'available_herbs':available_herbs,
+	}
+
+	return render (response, 'shop_detail.html',context)
