@@ -23,6 +23,7 @@
 <div class="row">
 <div class="col-sm-8">
 <div class="panel panel-default">
+{% if herbs %}
   {% for herb in herbs %}
   	<div class="thumbnail">
   		{% if herb.image %}
@@ -36,8 +37,9 @@
         </div>
     </div>
   {% endfor %}
-
+{% endif %}
   </div><!--panel-->
+}
 </div><!--column-1-->
 <div class="col-md-4">
 <div class="panel panel-default">
@@ -45,6 +47,7 @@
       Categories
     </div><!--panel-heading-->
     <div class="panel-body" style="padding:0;">
+    {% comment %}
       <ul class="list-group" style="margin:0;">
           <a class="list-group-item" href="{% url 'browse:herbs' %}">All
             <span class="label label-default pull-right">{{ total_herbs }}</span></a>
@@ -54,6 +57,7 @@
           </a>
         {% endfor %}
       </ul>
+      {% comment %}
     </div><!--panel-body-->
 </div><!--panel-->
 </div><!--column 2-->

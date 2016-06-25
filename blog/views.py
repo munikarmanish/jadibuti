@@ -22,8 +22,7 @@ def posts_list(request):
     # make categories a list of category string
     # to make it different from category of database
     categories = Category.objects.all().order_by('name')
-
-    #posts = posts.filter(category)
+    #posts = posts.filter(categories)
     search_query = request.GET.get('q')
     if search_query:
         # splitted_search_query=[]

@@ -16,12 +16,12 @@
     <div class="collapse navbar-collapse" id="nav1">
 
         <ul class="nav navbar-nav">
-            <li><a href="{% url 'browse:herbs'  %}">Browse Herbs</a></li>
-            <li><a href="{% url 'browse:yogas' %}">Yoga</a></li>
-            <li><a href="{% url 'blog:list' %}">Natural Remedies</a></li>
 
             <li class="{% if page_title == 'Herbs' %}active {% endif %}">
                 <a href="{% url 'browse:herbs'  %}">Herbs</a>
+            </li>
+            <li class="{% if page_title == 'Yogas' %}active{% endif %}">
+                <a href="{% url 'browse:yogas' %}">Yoga</a>
             </li>
             <li class="{% if page_title == 'Natural Remedies' %}active {% endif %}">
                 <a href="{% url 'blog:list' %}">Natural Remedies</a>

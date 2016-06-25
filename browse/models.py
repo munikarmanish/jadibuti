@@ -3,7 +3,6 @@ from django.core.urlresolvers import reverse
 
 # Create your models here.
 
-
 class HerbCategory (models.Model):
     name = models.CharField(max_length=50, null=False)
 
@@ -48,14 +47,15 @@ class Herb(models.Model):
 
     category = models.ForeignKey(HerbCategory)
 
-    shops = models.ManyToManyField(HerbShop)
+    shops = models.ManyToManyField(HerbShop, blank=True)
+
+    #curable_diseases = models.ManyToManyField(Disease, blank=True)
 
     def get_absolute_url(self):
         return reverse('browse:herb', kwargs={'slug': self.id})
 
     def __str__(self):
         return self.eng_name
-
 
 class Yoga (models.Model):
     name = models.CharField(max_length=100, null=True, blank=True)
@@ -90,8 +90,6 @@ class Disease(models.Model):
 
     def __str__(self):
         return self.name
-
-
 
 class CarouselImage (models.Model):
     show = models.BooleanField(null=False, default=True)
