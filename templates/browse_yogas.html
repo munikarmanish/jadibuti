@@ -1,9 +1,14 @@
 {% extends 'base.html' %}
 {% load markdown_deux_tags %}
+{% load staticfiles %}
 
 {% block page_title %}
 {{ page_title }}
 {% endblock page_title %}
+
+{% block bg %}
+  {% static 'jadibuti/img/bg-knife.jpg' %}
+{% endblock bg %}
 
 {% block page_header %}
 <header class="vpad-sm">
@@ -14,6 +19,7 @@
 {% endblock page_header %}
 
 {% block main %}
+<div class="col-sm-10">
 <div class="container">
 	<div class="row">
 		
@@ -40,5 +46,6 @@
 		<div class="col-sm-4">
 		</div>s
 	</div>
+</div>
 </div>
 {% endblock main %}
