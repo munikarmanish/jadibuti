@@ -45,9 +45,9 @@ class Herb(models.Model):
     width_field = models.IntegerField(default=0)
     description = models.TextField(null=True, blank=True)
 
-    categories = models.ManyToManyField (HerbCategory, blank=True)
+    categories = models.ManyToManyField (HerbCategory,blank=True)
 
-    shops = models.ManyToManyField(HerbShop, blank=True)
+    shops = models.ManyToManyField(HerbShop,blank=True)
 
     def get_absolute_url(self):
         return reverse('browse:herb', kwargs={'slug': self.id})
@@ -56,53 +56,58 @@ class Herb(models.Model):
         return self.eng_name
 
 
+class Disease(models.Model):
+    name = models.CharField(max_length=255)
+
+    herbs = models.ManyToManyField (Herb,blank=True)
+
+#    symptoms = models.ManyToManyField(Symptom)
+
+    def __str__(self):
+        return self.name
+
+
 class Yoga (models.Model):
     name = models.CharField(max_length=100, null=True, blank=True)
     description = models.TextField (null=True, blank=False)
+
     image = models.ImageField(
         null=True, blank=True,
         width_field='width_field', height_field='height_field')
     height_field = models.IntegerField(default=0)
     width_field = models.IntegerField(default=0)
 
+    diseases = models.ManyToManyField (Disease,blank=True)
+
     def __str__(self):
         return self.name
+
 
     def get_absolute_url (self,slug):
         return "browse/yoga/1/"
         return reverse('browse:yoga',kwargs={'slug':self.id})
 
 
-class Symptom (models.Model):
-    name = models.CharField (max_length=100)
+# class Symptom (models.Model):
+#     name = models.CharField (max_length=100)
 
-    yogas = models.ManyToManyField (Yoga,blank=True)
+#     yogas = models.ManyToManyField (Yoga,blank=True)
 
-    def __str__(self):
-        return self.name
+#     def __str__(self):
+#         return self.name
 
 
-class Disease(models.Model):
-    name = models.CharField(max_length=255)
+# class CarouselImage (models.Model):
+#     show = models.BooleanField(null=False, default=True)
 
-    herbs = models.ManyToManyField (Herb,blank=True)
+#     image = models.ImageField(
+#         null=False, blank=False,
+#         width_field='width_field', height_field='height_field')
+#     height_field = models.IntegerField(default=0)
+#     width_field = models.IntegerField(default=0)
 
-    symptoms = models.ManyToManyField(Symptom)
+#     caption = models.CharField(max_length=100)
+#     description = models.CharField(max_length=255)
 
-    def __str__(self):
-        return self.name
-
-class CarouselImage (models.Model):
-    show = models.BooleanField(null=False, default=True)
-
-    image = models.ImageField(
-        null=False, blank=False,
-        width_field='width_field', height_field='height_field')
-    height_field = models.IntegerField(default=0)
-    width_field = models.IntegerField(default=0)
-
-    caption = models.CharField(max_length=100)
-    description = models.CharField(max_length=255)
-
-    def __str__(self):
-        return self.caption
+#     def __str__(self):
+#         return self.caption

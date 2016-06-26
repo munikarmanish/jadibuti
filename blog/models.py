@@ -31,8 +31,11 @@ class Post(models.Model):
 
     tags = models.CharField(max_length=255)
     source = models.CharField(max_length=255)
-    categories = models.ManyToManyField(Category)
-    herbs = models.ManyToManyField(Herb)
+    categories = models.ManyToManyField(Category,blank=True)
+    herbs = models.ManyToManyField(Herb,blank=True)
+
+    yogas = models.ManyToManyField (Yoga,blank=True)
+    diseases = models.ManyToManyField (Disease,blank=True)
 
     def __str__(self):
         return self.title
