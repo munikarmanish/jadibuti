@@ -4,21 +4,23 @@ from django.contrib import admin
 
 from .models import *
 
+
 class HerbModelAdmin (admin.ModelAdmin):
-    list_display = ['eng_name','nep_name']
+    list_display = ['eng_name', 'nep_name']
     list_display_links = ['eng_name']
-    search_fields = ['eng_name', 'nep_name', 'sci_name','description']
+    search_fields = ['eng_name', 'nep_name', 'sci_name', 'description']
 
     class Meta:
         model = Herb
 
-class HerbCategoryModelAdmin (admin.ModelAdmin):
-	list_display = ['name']
-	list_display_links = ['name']
-	search_fields = ['name']
 
-	class Meta:
-		model = HerbCategory
+class HerbCategoryModelAdmin (admin.ModelAdmin):
+    list_display = ['name']
+    list_display_links = ['name']
+    search_fields = ['name']
+
+    class Meta:
+        model = HerbCategory
 
 # class CarouselImageModelAdmin (admin.ModelAdmin):
 #     list_display = ['caption']
@@ -29,11 +31,12 @@ class HerbCategoryModelAdmin (admin.ModelAdmin):
 #     class Meta:
 #         model = CarouselImage
 
+
 class HerbShopModelAdmin (admin.ModelAdmin):
-    list_display = ['name','location']
+    list_display = ['name', 'location']
     list_display_links = ['name']
     list_filter = ['location']
-    search_fields = ['name','location','description']
+    search_fields = ['name', 'location', 'description']
 
     class Meta:
         model = HerbShop
@@ -46,6 +49,7 @@ class HerbShopModelAdmin (admin.ModelAdmin):
 #     class Meta:
 #         model = Symptom
 
+
 class DiseaseModelAdmin (admin.ModelAdmin):
     list_display = ['name']
     list_display_links = ['name']
@@ -54,10 +58,11 @@ class DiseaseModelAdmin (admin.ModelAdmin):
     class Meta:
         model = Disease
 
+
 class YogaModelAdmin (admin.ModelAdmin):
     list_display = ['name']
     list_display_links = ['name']
-    search_fields = ['name','description']
+    search_fields = ['name', 'description']
 
     class Meta:
         model = Yoga
@@ -68,4 +73,4 @@ admin.site.register(Disease, DiseaseModelAdmin)
 admin.site.register(HerbShop, HerbShopModelAdmin)
 # admin.site.register(CarouselImage, CarouselImageModelAdmin)
 admin.site.register(Herb, HerbModelAdmin)
-admin.site.register (HerbCategory, HerbCategoryModelAdmin)
+admin.site.register(HerbCategory, HerbCategoryModelAdmin)

@@ -31,11 +31,11 @@ class Post(models.Model):
 
     tags = models.CharField(max_length=255)
     source = models.CharField(max_length=255)
-    categories = models.ManyToManyField(Category,blank=True)
-    herbs = models.ManyToManyField(Herb,blank=True)
+    categories = models.ManyToManyField(Category, blank=True)
+    herbs = models.ManyToManyField(Herb, blank=True)
 
-    yogas = models.ManyToManyField (Yoga,blank=True)
-    diseases = models.ManyToManyField (Disease,blank=True)
+    yogas = models.ManyToManyField(Yoga, blank=True)
+    diseases = models.ManyToManyField(Disease, blank=True)
 
     def __str__(self):
         return self.title
@@ -79,6 +79,7 @@ STAR_CHOICES = (
     (4, '4 Star'),
     (5, '5 Star'),
 )
+
 
 class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

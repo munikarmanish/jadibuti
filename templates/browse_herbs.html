@@ -1,43 +1,83 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 
+
 {% block page_title %}
   {{ page_title }}
 {% endblock page_title %}
+
 
 {% block bg %}
   {% static 'jadibuti/img/bg-knife.jpg' %}
 {% endblock bg %}
 
+
 {% block page_header %}
 <header class="vpad-sm">
 <div class="container">
-  <h1 class="white-text text-shadow">Browse</h1>
+  <h1 class="white-text text-shadow">
+    {% if request.GET.q %}
+      Search results
+    {% else %}
+      Browse
+    {% endif %}
+  </h1>
 </div>
 </header>
 {% endblock page_header %}
+
 
 {% block main %}
 
 <div class="container">
 <div class="row">
 
-  {% for herb in herbs %}
-  <div class="col-sm-6">
-  	<div class="thumbnail">
-  		{% if herb.image %}
-  			<a href="{{ herb.get_absolute_url }}">
-            <img src='{{ herb.image.url }}' class='img-responsive'>
-            </a>
-      {% endif %}
-  		<div class='caption'>
-            <h3><a href="{{ herb.get_absolute_url }}"> {{ herb.eng_name|truncatechars:20 }} </a> </h3>
-            <div>{{ herb.description|truncatechars:50 }}</div>
-        </div>
-    </div>
-  </div><!--col-->
-  {% endfor %}
+  <!-- list -->
+  <div class="col-md-8">
 
+    {% if not posts and request.GET.q %}
+    <div class="no-result">
+      <h3>No Result Found</h3>
+    </div>
+    {% endif %}
+
+    {% for h in herbs %}
+    <div class="panel panel-default">
+    <div class="panel-body">
+    <div class="row">
+
+        <!-- image -->
+        <div class="col-xs-3">
+        <div class="image-container" style="height: 100px; overflow: hidden;">
+        <a href="{{ h.get_absolute_url }}">
+          {% if h.image %}
+            <img src="{{ h.image.url }}" class="img-responsive">
+          {% else %}
+            <img src="{% static 'jadibuti/img/icon.png' %}" class="img-responsive">
+          {% endif %}
+        </a>
+        </div><!--img-container-->
+        </div>
+
+        <!-- image -->
+        <div class="col-xs-9">
+          <h3>
+          <a href="{{ h.get_absolute_url }}">
+            {{ h.eng_name }}
+            {% if h.nep_name %}
+              ({{ h.nep_name }})
+            {% endif %}
+          </a>
+          </h3>
+          <p>{{ h.description|truncatechars:160 }}</p>
+        </div>
+
+    </div><!--row-->
+    </div><!--panel-body-->
+    </div><!--panel-->
+    {% endfor %}
+
+  </div>
 
 
 {% comment %}
@@ -60,6 +100,14 @@
   </div><!--panel-->
   </div><!--column 2-->
   {% endcomment %}
+
+  <!-- sidebar -->
+  <div class="col-md-4">
+
+    <!-- TODO -->
+
+  </div>
+
 </div><!--row-->
 </div><!--container-->
 

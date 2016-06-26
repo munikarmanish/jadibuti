@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse
 
 # Create your models here.
 
+
 class HerbCategory (models.Model):
     name = models.CharField(max_length=50, null=False)
 
@@ -13,16 +14,16 @@ class HerbCategory (models.Model):
 class HerbShop (models.Model):
     name = models.CharField(max_length=120)
 
-    location = models.CharField(max_length=250,null=False, blank=False)
+    location = models.CharField(max_length=250, null=False, blank=False)
     image = models.ImageField(
         null=True, blank=True,
         width_field='width_field', height_field='height_field')
-    width_field = models.IntegerField(default=0,blank=True)
-    height_field = models.IntegerField(default=0,blank=True)
-    phone_number = models.CharField (max_length=30,null=True, blank=True)
-    email = models.EmailField (null=True, blank=True)
+    width_field = models.IntegerField(default=0, blank=True)
+    height_field = models.IntegerField(default=0, blank=True)
+    phone_number = models.CharField(max_length=30, null=True, blank=True)
+    email = models.EmailField(null=True, blank=True)
 
-    description = models.TextField (null=True, blank=True)
+    description = models.TextField(null=True, blank=True)
 
     longitude = models.FloatField(null=True, blank=True)
     latitude = models.FloatField(null=True, blank=True)
@@ -31,7 +32,7 @@ class HerbShop (models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('browse:shop',kwargs={'slug': self.id})
+        return reverse('browse:shop', kwargs={'slug': self.id})
 
 
 class Herb(models.Model):
@@ -45,9 +46,9 @@ class Herb(models.Model):
     width_field = models.IntegerField(default=0)
     description = models.TextField(null=True, blank=True)
 
-    categories = models.ManyToManyField (HerbCategory,blank=True)
+    categories = models.ManyToManyField(HerbCategory, blank=True)
 
-    shops = models.ManyToManyField(HerbShop,blank=True)
+    shops = models.ManyToManyField(HerbShop, blank=True)
 
     def get_absolute_url(self):
         return reverse('browse:herb', kwargs={'slug': self.id})
@@ -59,7 +60,7 @@ class Herb(models.Model):
 class Disease(models.Model):
     name = models.CharField(max_length=255)
 
-    herbs = models.ManyToManyField (Herb,blank=True)
+    herbs = models.ManyToManyField(Herb, blank=True)
 
 #    symptoms = models.ManyToManyField(Symptom)
 
@@ -69,7 +70,7 @@ class Disease(models.Model):
 
 class Yoga (models.Model):
     name = models.CharField(max_length=100, null=True, blank=True)
-    description = models.TextField (null=True, blank=False)
+    description = models.TextField(null=True, blank=False)
 
     image = models.ImageField(
         null=True, blank=True,
@@ -77,15 +78,14 @@ class Yoga (models.Model):
     height_field = models.IntegerField(default=0)
     width_field = models.IntegerField(default=0)
 
-    diseases = models.ManyToManyField (Disease,blank=True)
+    diseases = models.ManyToManyField(Disease, blank=True)
 
     def __str__(self):
         return self.name
 
-
-    def get_absolute_url (self,slug):
+    def get_absolute_url(self, slug):
         return "browse/yoga/1/"
-        return reverse('browse:yoga',kwargs={'slug':self.id})
+        return reverse('browse:yoga', kwargs={'slug': self.id})
 
 
 # class Symptom (models.Model):
