@@ -13,53 +13,33 @@ from .forms import *
 def posts_list(request):
     page_title = "Natural Remedies"
     posts = Post.objects.all()
-    total_posts = posts.count()
-    query_list =[]
-    query_list_by_tags = []
-    query_list_by_title =[]
-    query_list_by_content=[]
-    unique_query_list = []
-    splitted_search_query = []
-    test = 1
-    # all categories to list in side panel
-    # make categories a list of category string
-    # to make it different from category of database
     categories = Category.objects.all().order_by('name')
-    #posts = posts.filter(categories)
-    search_query = request.GET.get('q')
-    if search_query:
-        # splitted_search_query=[]
-        splitted_search_query = search_query.split(" ")
-        for something in splitted_search_query:
-            if something not in unique_query_list:
-                unique_query_list.append(something)
-        splitted_search_query = unique_query_list
-        unique_query_list = []
-        page_title = "Search results"
-        posts = posts.filter(
-            # Q(title__icontains=search_query) |
-            Q(tags__icontains=search_query)
-        ).distinct()
 
-    if not posts and search_query:
-        test = 0
-        for words in splitted_search_query:
-            posts = Post.objects.all().filter(Q(tags__icontains=words)|Q(title__icontains=words)).distinct()
-            # | Q(content__icontains=words)).distinct()
-            if posts not in query_list_by_tags:
-                query_list_by_tags.append(posts)
-            #posts = Post.objects.all().filter(Q(title__icontains=words)).distinct()
-            #if posts not in query_list_by_title:
-            #    query_list_by_title.append(posts)
-            #posts = Post.objects.all().filter(Q(content__icontains=words)).distinct()
-            #if posts not in query_list_by_content:
-            #    query_list_by_content.append(posts)
-    z = len(posts)
+    posts_by_tag = []
+    posts_by_title = []
+    posts_by_content = []
+
     category_id = request.GET.get('c')
     if category_id:
         posts = posts.filter(categories__id=category_id)
 
-    paginator = Paginator(posts, 2)
+    q = request.GET.get('q')
+    if q:
+        for qw in q.split(' '):  
+            # search in tags
+            posts_by_tag = [x for x in posts.filter(tags__icontains=qw)]
+            # search in title
+            posts_by_title = [x for x in posts.filter(title__icontains=qw)]
+            # search in content
+            posts_by_title = [x for x in posts.filter(content__icontains=qw)]
+        # make unique list
+        posts = posts_by_tag
+        posts.extend([p for p in posts_by_title if p not in posts])
+        posts.extend([p for p in posts_by_content if p not in posts])
+
+    
+
+    paginator = Paginator(posts, 4)
     page_var = 'page'
     page_no = request.GET.get(page_var)
 
@@ -75,15 +55,7 @@ def posts_list(request):
         'categories': categories,
         'paginator': paginator,
         'posts': posts,
-        'total_posts': total_posts,
         'page_var': page_var,
-        'splitted_search_query': splitted_search_query,
-        'query_list': query_list,
-        'query_list_by_tags':query_list_by_tags,
-        'query_list_by_title':query_list_by_title,
-        'query_list_by_content':query_list_by_content,
-        'test':test,
-        'z':z,
     }
 
     if category_id:
