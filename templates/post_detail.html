@@ -16,62 +16,111 @@
 
 {% block main %}
 <div class="container vpad">
-<div class="col-sm-10 col-sm-offset-1 white-bg" style="padding:30px;">
+<div class="row">
 
-    <header>
-        <h1>{{ post.title }}
-            {% if post.reviews %}
-            <span class="label label-success pull-right">
-                <span class="glyphicon glyphicon-star"></span> {{ post.rating|floatformat:1 }}
-            </span>
-            {% endif %}
-        </h1>
-    </header>
+    <!-- post -->
+    <div class="col-sm-8 white-bg" style="padding:30px;">
 
-    <hr>
+        <header>
+            <h1>{{ post.title }}
+                {% if post.reviews %}
+                <span class="label label-success pull-right">
+                    <span class="glyphicon glyphicon-star"></span> {{ post.rating|floatformat:1 }}
+                </span>
+                {% endif %}
+            </h1>
+        </header>
 
-    {% if post.herbs %}
-    <div class="herbs">
-        {% for h in post.herbs.all %}
-        <a href="{{ h.get_absolute_url }}"><span class="label label-default">{{ h.eng_name }}</span></a>
-        {% endfor %}
-    </div>
-    {% endif %}
-
-    <div class="content">
-        {{ post.content|markdown }}
         <hr>
-        <footer class="pull-right"><em>Source: {{ post.source }}</em></footer>
-        <div class="clearfix"></div>
-    </div><!--content-->
 
-    <hr>
+        {% if post.herbs %}
+        <div class="herbs">
+            {% for h in post.herbs.all %}
+            <a href="{{ h.get_absolute_url }}"><span class="label label-default">{{ h.eng_name }}</span></a>
+            {% endfor %}
+        </div>
+        {% endif %}
 
-    <!-- show the review form if user is authenticated -->
-    {% if request.user.is_authenticated and not re %}
-    <div class="review-form well">
-        <h4>Write or update review</h4>
-        <form action="" method="POST" role="review">{% csrf_token %}
-            <div class="form-group">
-                {{ form.star.label_tag }}
-                {{ form.star }}
-            </div>
-            <div class="form-group">
-                {{ form.comment.label_tag }}
-                {{ form.comment }}
-            </div>
-            <button type="submit" class="btn btn-primary">Submit Review</button>
-        </form>
-    </div><!--review-form-->
+        <div class="content">
+            {{ post.content|markdown }}
+            <hr>
+            <footer class="pull-right"><em>Source: {{ post.source }}</em></footer>
+            <div class="clearfix"></div>
+        </div><!--content-->
+
+        <hr>
+
+        <!-- show the review form if user is authenticated -->
+        {% if request.user.is_authenticated and not re %}
+        <div class="review-form well">
+            <h4>Write or update review</h4>
+            <form action="" method="POST" role="review">{% csrf_token %}
+                <div class="form-group">
+                    {{ form.star.label_tag }}
+                    {{ form.star }}
+                </div>
+                <div class="form-group">
+                    {{ form.comment.label_tag }}
+                    {{ form.comment }}
+                </div>
+                <button type="submit" class="btn btn-primary">Submit Review</button>
+            </form>
+        </div><!--review-form-->
+        {% endif %}
+
+        {% for r in post.reviews %}
+        <div class="reviews well">
+            <h4>{{ r.user.get_full_name }} <span class="label label-success">{{ r.star }}</span> <small>wrote on {{ r.created|date }}:</small></h4>
+            <p>{{ r.comment|linebreaks }}</p>
+        </div>
+        {% endfor %}
+
+    </div><!--col-->
+
+
+    <!-- sidebar -->
+    <div class="col-sm-4">
+
+    {% if post.herbs.all.count > 0 %}
+        
+        <div class="panel panel-default">
+        <div class="panel-heading">
+          Related Herbs
+        </div><!--panel-heading-->
+        <div class="panel-body" style="padding:0;">
+            <ul class="list-group" style="margin:0;">
+            {% for h in post.herbs.all %}
+                <a class="list-group-item" href="{{ h.get_absolute_url }}">
+                    {{ h.eng_name }}</span>
+                </a>
+            {% endfor %}
+            </ul>
+        </div><!--panel-body-->
+        </div><!--panel-->
+
     {% endif %}
 
-    {% for r in post.reviews %}
-    <div class="reviews well">
-        <h4>{{ r.user.get_full_name }} <span class="label label-success">{{ r.star }}</span> <small>wrote on {{ r.created|date }}:</small></h4>
-        <p>{{ r.comment|linebreaks }}</p>
-    </div>
-    {% endfor %}
+    {% if post.yogas.all.count > 0 %}
+        
+        <div class="panel panel-default">
+        <div class="panel-heading">
+          Suggested Yoga
+        </div><!--panel-heading-->
+        <div class="panel-body" style="padding:0;">
+            <ul class="list-group" style="margin:0;">
+            {% for x in post.yogas.all %}
+                <a class="list-group-item" href="{{ x.get_absolute_url }}">
+                    {{ x.name }}</span>
+                </a>
+            {% endfor %}
+            </ul>
+        </div><!--panel-body-->
+        </div><!--panel-->
 
-</div><!--col-->
+    {% endif %}
+
+    </div><!--col-->
+
+</div><!--row-->
 </div><!--container-->
 {% endblock main %}
