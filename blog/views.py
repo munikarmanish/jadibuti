@@ -44,7 +44,7 @@ def posts_list(request):
     if not posts and search_query:
         test = 0
         for words in splitted_search_query:
-            posts = Post.objects.all().filter(Q(tags__icontains=words)).distinct()
+            posts = Post.objects.all().filter(Q(tags__icontains=words)|Q(title__icontains=words)).distinct()
             # | Q(content__icontains=words)).distinct()
             if posts not in query_list_by_tags:
                 query_list_by_tags.append(posts)
