@@ -14,10 +14,13 @@ def posts_list(request):
     page_title = "Natural Remedies"
     posts = Post.objects.all()
     total_posts = posts.count()
-    query_list = []
+    query_list =[]
+    query_list_by_tags = []
+    query_list_by_title =[]
+    query_list_by_content=[]
     unique_query_list = []
     splitted_search_query = []
-
+    test = 1
     # all categories to list in side panel
     # make categories a list of category string
     # to make it different from category of database
@@ -31,21 +34,27 @@ def posts_list(request):
             if something not in unique_query_list:
                 unique_query_list.append(something)
         splitted_search_query = unique_query_list
-
+        unique_query_list = []
         page_title = "Search results"
         posts = posts.filter(
-            Q(title__icontains=search_query) |
-            Q(content__icontains=search_query)
+            # Q(title__icontains=search_query) |
+            Q(tags__icontains=search_query)
         ).distinct()
 
     if not posts and search_query:
+        test = 0
         for words in splitted_search_query:
-            posts = Post.objects.all()
-            posts = posts.filter(Q(title__icontains=words) | Q(
-                content__icontains=words)).distinct()
-            query_list.append(posts)
-
-    # filter category as well
+            posts = Post.objects.all().filter(Q(tags__icontains=words)).distinct()
+            # | Q(content__icontains=words)).distinct()
+            if posts not in query_list_by_tags:
+                query_list_by_tags.append(posts)
+            #posts = Post.objects.all().filter(Q(title__icontains=words)).distinct()
+            #if posts not in query_list_by_title:
+            #    query_list_by_title.append(posts)
+            #posts = Post.objects.all().filter(Q(content__icontains=words)).distinct()
+            #if posts not in query_list_by_content:
+            #    query_list_by_content.append(posts)
+    z = len(posts)
     category_id = request.GET.get('c')
     if category_id:
         posts = posts.filter(categories__id=category_id)
@@ -70,6 +79,11 @@ def posts_list(request):
         'page_var': page_var,
         'splitted_search_query': splitted_search_query,
         'query_list': query_list,
+        'query_list_by_tags':query_list_by_tags,
+        'query_list_by_title':query_list_by_title,
+        'query_list_by_content':query_list_by_content,
+        'test':test,
+        'z':z,
     }
 
     if category_id:
