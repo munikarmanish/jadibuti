@@ -8,7 +8,7 @@ class PostModelAdmin(admin.ModelAdmin):
 
     class Meta:
         model = Post
-        
+
     list_display = ['title', 'updated', 'created']
     list_display_links = ['title']
     list_filter = ['updated', 'created', 'categories']
