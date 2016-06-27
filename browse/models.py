@@ -84,7 +84,6 @@ class Yoga (models.Model):
         return self.name
 
     def get_absolute_url(self, slug):
-        return "browse/yoga/1/"
         return reverse('browse:yoga', kwargs={'slug': self.id})
 
 

@@ -31,11 +31,11 @@
 				</a>
 				{% endif %}
 			<div class="caption">
-				<a href="{{ yo.get_absolute_url }}">
+				<a href="{%url "browse:yoga" id=yo.id%}">
 				<h3>{{ yo.name }}</h3>
 				</a>
 				<p>
-					{{ yo.description|truncatechars:30 }}
+					{{ yo.description|markdown }}
 				</p>
 			</div>
 			</div>

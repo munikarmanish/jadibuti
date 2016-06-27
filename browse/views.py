@@ -34,9 +34,9 @@ def yoga_list(response):
     return render(response, 'browse_yogas.html', context)
 
 
-def yoga_detail(response, slug):
+def yoga_detail(response, id=None):
 
-    yoga = get_object_or_404(Yoga, id=slug)
+    yoga = get_object_or_404(Yoga, id=id)
 
     context = {
         'page_title': 'Yoga',
