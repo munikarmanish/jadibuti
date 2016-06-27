@@ -14,25 +14,29 @@
 {% endblock bg %}
 
 
+{% block page_header %}
+<header class="white-bg">
+<div class="container">
+    <h1>{{ post.title }}
+    {% if post.rating %}
+        <span class="label label-success pull-right">
+            <span class="glyphicon glyphicon-star"></span> {{ post.rating|floatformat:1 }}
+        </span>
+    {% endif %}
+    </h1>
+</div><!--container-->
+</header>
+{% endblock page_header %}
+
+
 {% block main %}
-<div class="container vpad">
+<div class="container vpad-sm">
 <div class="row">
 
     <!-- post -->
     <div class="col-sm-8 white-bg" style="padding:30px;">
 
-        <header>
-            <h1>{{ post.title }}
-                {% if post.reviews %}
-                <span class="label label-success pull-right">
-                    <span class="glyphicon glyphicon-star"></span> {{ post.rating|floatformat:1 }}
-                </span>
-                {% endif %}
-            </h1>
-        </header>
-
-        <hr>
-
+        {% comment %}
         {% if post.herbs %}
         <div class="herbs">
             {% for h in post.herbs.all %}
@@ -40,6 +44,7 @@
             {% endfor %}
         </div>
         {% endif %}
+        {% endcomment %}
 
         <div class="content">
             {{ post.content|markdown }}

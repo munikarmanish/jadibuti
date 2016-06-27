@@ -1,67 +1,78 @@
 {% extends 'base.html' %}
-
 {% load markdown_deux_tags %}
+
 
 {% block page_title %}
     {{ herb.eng_name }}
 {% endblock page_title %}
 
+
 {% block page_header %}
-<header>
-<div class="container">
-    <h1>{{ herb.eng_name }}{% if herb.nep_name %} | {{ herb.nep_name }}{% endif %}</h1>
-    <hr>
-</div><!--container-->
-</header>
+    <header>
+    <div class="container">
+        <h1>{{ herb.eng_name }} {% if herb.nep_name %} ({{ herb.nep_name }}) {% endif %}</h1>
+        <hr>
+    </div><!--container-->
+    </header>
 {% endblock page_header %}
 
-{% block main %}
-<div class="container col-md-12">
-<div class="row">
-    <div class="col-md-8">
-<div class="panel panel-default">
-    {% if herb.image %}
-    <img src="{{ herb.image.url }}" class="image-responsive" />
-    <hr>
-    {% endif %}
 
-    <div class="content">
-    {{ herb.description|markdown }}
-    </div><!--content-->
-</div><!--panel-->
-    </div><!--column 1-->
-<div class="col-md-4">
+{% block main %}
+
+<div class="container">
 <div class="row">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      Available in
-    </div><!--panel-heading-->
-    <div class="panel-body" style="padding:0;">
-      <ul class="list-group" style="margin:0;">
-        {% for shop in available_in %}
-        <a href="{{ shop.get_absolute_url }}" class="list-group-item">
-            {{ shop.name }} <span class="label label-default pull-right">{{ shop.location }}</span>
-        </a>
-        {% endfor %}
-      </ul>
-    </div><!--panel-body-->
-  </div><!--panel-->
-  <div class="panel panel-default">
-    <div class="panel-heading">
-    Used for (Diseases)
-    </div>
-    <div class="panel-body" style="padding:0;">
-        <ul class="list-group" style="padding:0;">
-        {% for disease in diseases_cured %}
-            <a href="#" class="list-group-item">
-            {{ disease.name }}
-            </a>
-        {% endfor %}
-        </ul>
-    </div>
-  </div>
-  </div><!--col 2-->
+
+    <!--detail-->
+    <div class="col-sm-8">
+        {% if herb.image %}
+        <img src="{{ herb.image.url }}" class="img-responsive" />
+        <hr>
+        {% endif %}
+
+        <div class="content">
+        {{ herb.description|markdown }}
+        </div><!--content-->
+    </div><!--detail-->
+
+    
+    <!-- sidebar -->
+    <div class="col-sm-4">
+    
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Available in
+            </div><!--panel-heading-->
+            <div class="panel-body" style="padding:0;">
+                <ul class="list-group" style="margin:0;">
+                {% for shop in available_in %}
+                    <a href="{{ shop.get_absolute_url }}" class="list-group-item">
+                        {{ shop.name }} <span class="label label-default pull-right">{{ shop.location }}</span>
+                    </a>
+                {% endfor %}
+                </ul>
+            </div><!--panel-body-->
+        </div><!--panel-->
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Used for (Diseases)
+            </div>
+            <div class="panel-body" style="padding:0;">
+                <ul class="list-group" style="margin:0;">
+                {% for disease in diseases_cured %}
+                    <a href="#" class="list-group-item">
+                        {{ disease.name }}
+                    </a>
+                {% endfor %}
+                </ul>
+            </div><!--panel-body-->
+        </div><!--panel-->
+
+    </div><!--sidebar -->
+
 </div><!--row-->
+    
+    <hr>
 </div><!--container-->
 
 {% endblock main %}

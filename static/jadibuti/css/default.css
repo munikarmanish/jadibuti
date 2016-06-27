@@ -17,6 +17,10 @@ nav.navbar, .well {
     padding-top: 50px;
     padding-bottom: 50px;
 }
+.vpad-sm {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
 
 .list-group-item {
     border-left: none;
